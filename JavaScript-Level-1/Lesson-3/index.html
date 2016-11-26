@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Урок 3 - javascript-1 </title>
+  <meta name="author" content="Журавлев Георгий">
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+	<link  href="libs/highlight/styles/hybrid.css" rel="stylesheet">
+	<script src="libs/highlight/highlight.pack.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+
+  <script type="application/x-template">
+      @-webkit-keyframes {{animationId}} {
+      
+      from {
+        left: {{fromIndex}};
+        top: 0px;
+      }
+      33% {
+        left: {{fromIndex}};
+        top: {{upIndex}};
+      }
+      66% {
+        top: {{upIndex}};
+        left: {{toIndex}};
+      }
+      100% {
+        top: 0px;
+        left: {{toIndex}};
+      }
+      
+
+    }
+
+    @keyframes {{animationId}} {
+      
+      from {
+        left: {{fromIndex}};
+        top: 0px;
+      }
+      33% {
+        left: {{fromIndex}};
+        top: {{upIndex}};
+      }
+      66% {
+        top: {{upIndex}};
+        left: {{toIndex}};
+      }
+      100% {
+        top: 0px;
+        left: {{toIndex}};
+      }
+    }
+        
+    </script>
+
+
+</head>
+<body>	
+ 	<div class="container">
+	 <div class="page-header">
+        <h1>Урок номер 3</h1>
+   </div>
+     <ul>
+     	<li>Сортировки, в качестве домашнего задания:
+           <ul>
+              <li>http://algolist.manual.ru/sort/shell_sort.php - Сортировка Шелла</li>
+              <li>http://algolist.manual.ru/sort/pyramid_sort.php - Пирамидальная сортировка</li>
+              <li>http://algolist.manual.ru/sort/quick_sort.php - Быстрая сортировка</li>
+          </ul>
+        <h3>Решение: </h3>
+
+          <div id="pole" class="pole">
+
+          </div>
+          <p><button onclick="animSort1()">Пирамидальная сортировка</button>
+          <button onclick="animSort2()">Быстрая сортировка</button>
+          <button onclick="animSort3()">Сортировка Шелла</button></p>
+          <p>
+          <button onclick="animSort4()">Вернуть несортированный</button>
+          <button onclick="animSort5()">Создать новый массив</button>
+          </p>
+          <p>Анимация реализованна средствами css3. Кадры формируют javascript. Массив создается из десяти элементов с целыми числами до 100 (при желании легко модифицировать). Каждая сортировака в отдельной функции, к которой добавлен функционал перемещения шариков. </p>
+          <p>Скрипты находятся по адресу <a href="js/main.js">js/main.js</a></p>
+      </li>
+      <li>
+        Напишите функцию min, принимающую два аргумента, и возвращающую минимальный из них.
+        <blockquote>
+            console.log(min(0, 10)); // → 0<br>
+            console.log(min(0, -10)); // → -10
+        </blockquote>
+        <p>Результат: 
+
+      <pre><code class="javascript">
+  function min(a, b) {
+    return ( a &gt; b ? b : a );
+  }
+
+  console.log(min(0, 10)); // &rarr; 0
+  console.log(min(0, -10)); // &rarr; -10
+
+  document.write(min(0, 10),' и ',min(0, -10));
+      </code></pre>
+
+
+        <strong>
+
+        <script type="text/javascript">
+
+          function min(a, b) {
+            return ( a > b ? b : a );
+          }
+
+          console.log(min(0, 10)); // → 0
+          console.log(min(0, -10)); // → -10
+
+          document.write(min(0, 10),' и ',min(0, -10));
+
+        </script>
+   
+
+
+
+        </strong>
+        </p>
+
+      </li>
+      <li>
+      <p>Символ номер N строки можно получить, добавив к ней .charAt(N) (
+      “строчка”.charAt(5) ) – схожим образом с получением длины строки при помощи
+      .length. Возвращаемое значение будет строковым, состоящим из одного
+      символа (к примеру, “к”). У первого символа строки позиция 0, что означает,
+      что у последнего символа позиция будет string.length – 1. Другими словами, у
+      строки из двух символов длина 2, а позиции её символов будут 0 и 1.Напишите
+      функцию countBs, которая принимает строку в качестве аргумента, и
+      возвращает количество символов “B”, содержащихся в строке.Затем напишите
+      функцию countChar, которая работает примерно как countBs, только принимает
+      второй параметр — символ, который мы будем искать в строке (вместо того,
+      чтобы просто считать количество символов “B”). Для этого переделайте
+      функцию countBs.
+      </p>
+ <pre><code class="javascript">
+function countChar(stroka, a) {
+  var count = 0;
+
+  for (var i =0 ; i &lt; stroka.length-1; i++) {
+
+    if ( stroka.charAt(i) == a )
+      count++;
+
+  }
+
+  return count;
+}
+
+document.write('Число вхождений буквы \&quot;е\&quot; в тексте \&quot;Ноль чётный. Единица нечётная. У любого числа N чётность такая же, как у N-2.Напишите рекурсивную функцию isEven согласно этим правилам.\&quot; равно: ',countChar(&quot;Ноль чётный. Единица нечётная. У любого числа N чётность такая же, как у N-2.Напишите рекурсивную функцию isEven согласно этим правилам.&quot; , &quot;е&quot;) );
+ </code></pre>     
+      <p>
+       <strong>
+    
+
+        <script type="text/javascript">
+
+          function countChar(stroka, a) {
+            var count = 0;
+
+            for (var i =0 ; i < stroka.length-1; i++) {
+
+              if ( stroka.charAt(i) == a )
+                count++;
+
+            }
+
+            return count;
+          }
+
+          document.write('Число вхождений буквы \"е\" в тексте \"Ноль чётный. Единица нечётная. У любого числа N чётность такая же, как у N-2.Напишите рекурсивную функцию isEven согласно этим правилам.\" равно: ',countChar("Ноль чётный. Единица нечётная. У любого числа N чётность такая же, как у N-2.Напишите рекурсивную функцию isEven согласно этим правилам." , "е") );
+
+        </script>
+        </strong>
+        </p>
+      </li>
+      <li>
+       <p>Ноль чётный. Единица нечётная. У любого числа N чётность такая же, как у N-2.Напишите рекурсивную функцию isEven согласно этим правилам. Она
+должна принимать число и возвращать булевское значение. Потестируйте её на
+50 и 75. Попробуйте задать ей -1. Почему она ведёт себя таким образом?
+Можно ли её как-то исправить?
+        </p>
+         
+ <pre><code class="javascript">
+ function isEven(N) {
+
+
+if (N &gt; 0) {
+  if( (N-2) == 0 ) {
+    return true;
+  } else if ( (N-2) == 1) {
+    return false;
+  } else {
+    return isEven( N-2 );
+  }
+} else {
+  if( (N+2) == 0 ) {
+    return true;
+  } else if ( (N+2) == 1) {
+    return false;
+  } else {
+    return isEven( N+2 );
+  }
+}
+ 
+
+  
+}
+
+document.write('50 ', isEven(50),'&lt;br&gt;');
+document.write('70 ', isEven(75),'&lt;br&gt;');
+document.write('-1 ', isEven(-1));
+ </code></pre>
+
+
+        <p>
+
+        Для отрицательных чисел можно сделать двумя способами, либо по модулю взять число, либо сделать как я, т. е. прибавлять 2. Иначе будет происходить переполнение стека, т. к. бесконечная рекурсия.<br><br>
+        <strong>
+
+          <script type="text/javascript">
+
+          function isEven(N) {
+
+
+          if (N > 0) {
+            if( (N-2) == 0 ) {
+              return true;
+            } else if ( (N-2) == 1) {
+              return false;
+            } else {
+              return isEven( N-2 );
+            }
+          } else {
+            if( (N+2) == 0 ) {
+              return true;
+            } else if ( (N+2) == 1) {
+              return false;
+            } else {
+              return isEven( N+2 );
+            }
+          }
+           
+
+            
+          }
+
+          document.write('50 ', isEven(50),'<br>');
+          document.write('70 ', isEven(75),'<br>');
+          document.write('-1 ', isEven(-1));
+          </script>
+
+        </strong>
+        </p>
+      </li>
+      <li>
+      <h3>Калькулятор.</h3>
+      <p>
+        Простой калькулятор. Можно последовательно выполнять действия как на обычном калькуляторе. До конца не протестирован, но кажется работает.
+      </p>
+      <form name="myform" id="myform">
+      Введите число: <br><br>
+      <input type="text" id="userEntry" size="15" class="form-control" value=""> 
+      <button type="button" name="Multiplication" class="btn btn-default btn-lg" onclick="mult()">*</button>
+       <button type="button" name="Division" class="btn btn-default btn-lg" onclick="division()">/</button>
+      <button type="button" name="Minus" class="btn btn-default btn-lg" onclick="minus()">-</button>
+      <button type="button" name="Plus" class="btn btn-default btn-lg" onclick="plus()">+</button>
+      <button type="button" name="Calc" class="btn btn-default btn-lg" onclick="end()">=</button>
+      <button type="button" name="Clean" class="btn btn-default btn-lg" onclick="clean()">C</button>
+      </form>
+      <pre><code>
+var buff=test;
+var result=0;
+var first=false;
+
+function test() {}
+function plus() {
+  var x = + document.getElementById(&quot;userEntry&quot;).value;
+  
+  if(buff != plus &amp;&amp; buff != test)
+  {
+   buff();
+   buff = plus;
+   return;
+  }
+
+
+  buff = plus;
+  if(first)
+  {
+    result = result + x;
+    document.getElementById(&quot;userEntry&quot;).value = String(result);
+  }
+  else
+  {  
+    first = true;
+    result =  x;
+    document.getElementById(&quot;userEntry&quot;).value =  String(result);  
+  }
+}
+
+function minus() {
+  var x = + document.getElementById(&quot;userEntry&quot;).value;
+
+  if(buff != minus &amp;&amp; buff != test)
+  {
+   buff();
+   buff = minus;
+   return;
+  }
+
+  buff = minus;
+
+  if(first)
+  {
+    result = result - x;
+    document.getElementById(&quot;userEntry&quot;).value = String(result);
+  }
+  else
+  {  
+    first = true;
+    result =  x;
+    document.getElementById(&quot;userEntry&quot;).value =  String(result);  
+  }      
+}
+
+function mult() {
+  var x = + document.getElementById(&quot;userEntry&quot;).value;
+  
+  if(buff != mult &amp;&amp; buff != test)
+  {
+   buff();
+   buff = mult;
+   return;
+  }
+ 
+  buff = mult;
+  
+  if(first)
+  {
+    result = result * x;
+    document.getElementById(&quot;userEntry&quot;).value = String(result);
+  }
+  else
+  {  
+    first = true;
+    result =  x;
+    document.getElementById(&quot;userEntry&quot;).value =  String(result);  
+  }
+   
+
+}
+
+function division() {
+  var x = + document.getElementById(&quot;userEntry&quot;).value;
+  
+
+
+ if(buff != division &amp;&amp; buff != test)
+{
+    buff();
+    buff = division;
+   return;
+ }
+
+   
+ buff = division;
+
+  if(first)
+  {
+    result = result / x;
+    document.getElementById(&quot;userEntry&quot;).value = String(result);
+  }
+  else
+  {  
+    first = true;
+    result =  x;
+    document.getElementById(&quot;userEntry&quot;).value =  String(result);  
+  }
+}
+
+function clean() {
+  result = 0;
+  buff=test;
+  first = false;
+  document.getElementById(&quot;userEntry&quot;).value = 0;
+}
+
+function end() {  
+  buff();
+  result = 0;
+  buff=test;
+  first = false;
+}       
+      </code></pre>
+        <script type="text/javascript">
+        var buff=test;
+        var result=0;
+        var first=false;
+
+        function test() {}
+        function plus() {
+          var x = + document.getElementById("userEntry").value;
+          
+          if(buff != plus && buff != test)
+          {
+           buff();
+           buff = plus;
+           return;
+          }
+
+
+          buff = plus;
+          if(first)
+          {
+            result = result + x;
+            document.getElementById("userEntry").value = String(result);
+          }
+          else
+          {  
+            first = true;
+            result =  x;
+            document.getElementById("userEntry").value =  String(result);  
+          }
+        }
+
+        function minus() {
+          var x = + document.getElementById("userEntry").value;
+
+          if(buff != minus && buff != test)
+          {
+           buff();
+           buff = minus;
+           return;
+          }
+
+          buff = minus;
+
+          if(first)
+          {
+            result = result - x;
+            document.getElementById("userEntry").value = String(result);
+          }
+          else
+          {  
+            first = true;
+            result =  x;
+            document.getElementById("userEntry").value =  String(result);  
+          }      
+        }
+
+        function mult() {
+          var x = + document.getElementById("userEntry").value;
+          
+          if(buff != mult && buff != test)
+          {
+           buff();
+           buff = mult;
+           return;
+          }
+         
+          buff = mult;
+          
+          if(first)
+          {
+            result = result * x;
+            document.getElementById("userEntry").value = String(result);
+          }
+          else
+          {  
+            first = true;
+            result =  x;
+            document.getElementById("userEntry").value =  String(result);  
+          }
+           
+
+        }
+
+        function division() {
+          var x = + document.getElementById("userEntry").value;
+          
+
+
+         if(buff != division && buff != test)
+        {
+            buff();
+            buff = division;
+           return;
+         }
+        
+           
+         buff = division;
+
+          if(first)
+          {
+            result = result / x;
+            document.getElementById("userEntry").value = String(result);
+          }
+          else
+          {  
+            first = true;
+            result =  x;
+            document.getElementById("userEntry").value =  String(result);  
+          }
+        }
+
+        function clean() {
+          result = 0;
+          buff=test;
+          first = false;
+          document.getElementById("userEntry").value = 0;
+        }
+
+        function end() {  
+          buff();
+          result = 0;
+          buff=test;
+          first = false;
+        }
+
+      </script>    
+      </li>
+     </ul>
+
+    </div>
+<script src="js/main.js"></script>
+<script type="text/javascript">animSort5();</script>
+</body>
+</html>

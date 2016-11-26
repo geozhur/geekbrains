@@ -1,0 +1,47 @@
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  margin-bottom: 60px;
+}
+
+.container {
+  width: auto;
+  max-width: 680px;
+  padding: 0 15px;
+}
+
+.container .text-muted {
+  margin: 20px 0;
+}
+
+pre {
+	background: none;
+	border: none;
+	margin-left: 0;
+}
+
+#out {
+  display: inline-block;
+  width: 100%;
+  background: url("../img/tetr.jpg") repeat;
+}
+
+#out {
+  text-align: center;
+}
+
+.tablica {
+  float: left;
+  padding: 20px;
+}
+
+.tablica td{
+  text-align: right;
+  width: 25px;
+}
+
+.tablica td:nth-child(2n) {
+  width: 15px;
+}

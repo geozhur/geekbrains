@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Урок 1 - javascript-1 </title>
+     <link href="css/bootstrap.min.css" rel="stylesheet">
+     <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+	
+ 	<div class="container">
+
+	 <div class="page-header">
+        <h1>Урок номер 1</h1>
+      </div>
+
+   
+
+     <ul>
+     	<li>Вывести «Привет, Javascript» c помощью alert <a href="javascript:alert('Привет, Javascript')">ALERT</a></li>
+     	<li>Работа с переменными 
+		<ul>
+			<li>Объявите две переменные: admin и name.</li>
+			<li>Запишите в name строку "Василий".</li>
+			<li>Скопируйте значение из name в admin.</li>
+			<li>Выведите admin (должно вывести «Василий»).</li>
+		</ul>
+
+     	</li>
+     	<li>* Самостоятельно разобраться с атрибутами тэга script (async и defer) <a href="https://learn.javascript.ru/external-script">Тут прочитал (https://learn.javascript.ru/external-script)</a></li>
+     </ul>
+
+
+    <p class="lead" id="homework">
+
+    	<h3>Решение:</h3>
+	    <pre>
+		&lt;script type=&quot;text/javascript&quot;&gt;
+			&quot;use strict&quot;;
+			var name = &quot;Василий&quot;;
+			var admin;
+			admin = name;
+			document.write(admin);
+		&lt;/script&gt;
+		</pre>
+         
+		<h3>Результат:</h3>
+
+				<script type="text/javascript">
+			"use strict";
+			var name = "Василий";
+			var admin;
+			admin = name;
+			document.write(admin);
+		</script>
+    </p>
+    </div>
+
+</body>
+</html>

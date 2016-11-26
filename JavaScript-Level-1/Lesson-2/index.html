@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Урок 1 - javascript-1 </title>
+  <meta name="author" content="Журавлев Георгий">
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+	<link  href="libs/highlight/styles/hybrid.css" rel="stylesheet">
+	<script src="libs/highlight/highlight.pack.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body>	
+ 	<div class="container">
+	 <div class="page-header">
+        <h1>Урок номер 2</h1>
+   </div>
+     <ul>
+     	<li><p>Есть такой код: </p>
+     	<pre><code class="javascript">
+  // Инициализация переменных, "a" и "b" присваивается 1
+  var a = 1, b = 1, c, d;
+
+  // Переменная "a" увеличивается на 1, после этого присваивается 
+  // переменной "c" и выводится.
+  c = ++a; alert(c); // 2
+
+  // Переменная "b" присваивается переменной "d". После присваивания
+  // "b" увеличивается на 1 (становится 2). Выводится переменная "d".
+  d = b++; alert(d); // 1
+
+  // Переменная "a" (была 2 стала 3) увеличивается на 1, 
+  // после этого выполняется операция сложения и присваивается "c"
+  c = (2+ ++a); alert(c); // 5
+
+  // Складывается 2 + b (2 + 2)и сумма присваивается  "d". После этого
+  // "b" увеличивается на 1 (становится 3)
+  d = (2+ b++); alert(d); // 4
+
+  // Выводим "a"
+  alert(a); // 3
+  // Выводим "b"
+  alert(b); // 3
+			</code></pre>
+			<p>Необходимо разобраться почему работает именно так. Объяснения написать в виде комментария к каждой строчке.</p>
+     	</li>
+     	<li><p>Чему будет равен x в примере ниже?</p>
+      <pre><code class="javascript">
+  var a = 2;
+
+
+  //  "a" умножается на "a" , потом присваивается 1.
+  var x = 1 + (a *= 2);
+      </code></pre>
+
+      <p>Результат: <strong>x =
+
+      <script type="text/javascript">
+      "use strict";
+      var a = 2;
+      var x = 1 + (a *= 2);
+      document.write(x);
+      </script>
+      </strong></p>
+
+      </li>
+      <li>
+        <p>* Забегая немного вперед. Напишите программу, которая выводит через console.log все числа от 1 до 100, с двумя исключениями. Для чисел, нацело делящихся на 3, она должна выводить‘Fizz’, а для чисел, делящихся на 5 (но не на 3) – ‘Buzz’.Когда сумеете – исправьте её так, чтобы она выводила «FizzBuzz» для всех чисел, которые делятся и на 3 и на 5.</p>
+         <script type="text/javascript">
+         
+
+         function FizzOrBuzz() {
+            for (var i = 1; i <= 100; i++) {
+                if( (i % 3) == 0)
+                  console.log("Fizz");
+                else if( (i % 5) == 0)
+                  console.log("Buzz");
+                else
+                  console.log(i);
+            }
+         }
+
+         function FizzAndBuzz() {
+            for (var i = 1; i <= 100; i++) {
+                if( (i % 3) == 0 && (i % 5) == 0 )
+                  console.log("FizzBuzz");
+                else
+                  console.log(i);
+            }
+         }
+
+
+        </script>
+<p>a) 
+</p>
+        <pre><code class="javascript">
+function FizzOrBuzz() {
+  for (var i = 1; i <= 100; i++) {
+      if( (i % 3) == 0)
+        console.log("Fizz");
+      else if( (i % 5) == 0)
+        console.log("Buzz");
+      else
+        console.log(i);
+  }
+}
+        </code></pre>
+        
+        <button onclick="FizzOrBuzz()">Fizz или Buzz вывести на консоль</button>
+        <br><br>
+
+<p>b) Когда сумеете – исправьте её так, чтобы она выводила «FizzBuzz» для всех чисел, которые делятся и на 3 и на 5.</p>
+        <pre><code class="javascript">
+function FizzAndBuzz() {
+  for (var i = 1; i <= 100; i++) {
+      if( (i % 3) == 0 && (i % 5) == 0 )
+        console.log("FizzBuzz");
+      else
+        console.log(i);
+  }
+}
+        </code></pre>
+        <button onclick="FizzAndBuzz()">Fizz и Buzz вывести на консоль</button>
+        <br><br>
+      </li>
+      <li>
+        <p>Домашнее задание из методички.<br>
+        Добавить еще одну переменную с помощью prompt. Передать эту переменную во второй цикл, в качестве предела вычисления переменной j.
+        </p>
+      <pre><code class="javascript">
+
+  var n = parseInt(prompt("Введите число: ", 1));
+  for(var i=1;i<=n;i++){
+    for(var j=1;j<=10;j++){
+      document.write("&lt;br&gt;",i," x ",j," = ", j*i );
+    }
+  }
+
+  /*
+    Домашнее задание.
+    Добавить еще одну переменную с помощью prompt. Передать эту переменную во второй цикл,в качестве предела вычисления переменной j.
+  */
+
+      </code></pre>
+      
+      Решение:
+
+      <pre><code class="javascript">
+  function ixj() {
+    var n = parseInt(prompt(&quot;Введите число n: &quot;, 1));
+    var m = parseInt(prompt(&quot;Введите число m: &quot;, 1));
+    var out = &quot;&lt;h3&gt;ТАБЛИЦА УМНОЖЕНИЯ&lt;/h3&gt;&quot;;
+    for(var i=1;i&lt;=n;i++){
+      out += &quot;&lt;div class=\&quot;tablica\&quot;&gt;&lt;table&gt;&quot;;
+      for(var j=1;j&lt;=m;j++){
+        //document.write(&quot;&lt;br&gt;&quot;,i,&quot; x &quot;,j,&quot; = &quot;, j*i );
+        out += &quot;&lt;tr&gt;&lt;td&gt;&quot; + i + &quot;&lt;/td&gt;&lt;td&gt; x &lt;/td&gt;&lt;td&gt;&quot; + j + &quot;&lt;/td&gt;&lt;td&gt; = &lt;/td&gt;&lt;td&gt;&quot; + (j*i)+ &quot;&lt;/td&gt;&lt;/tr&gt;&quot;;
+      }
+      out += &quot;&lt;/table&gt;&lt;/div&gt;&quot;;
+    }
+
+    document.getElementById('out').innerHTML= out;
+ }
+      </code></pre>
+
+      <script type="text/javascript">
+
+         function ixj() {
+            var n = parseInt(prompt("Введите число n: ", 1));
+            var m = parseInt(prompt("Введите число m: ", 1));
+            var out = "<h3>ТАБЛИЦА УМНОЖЕНИЯ</h3>";
+            for(var i=1;i<=n;i++){
+              out += "<div class=\"tablica\"><table>";
+              for(var j=1;j<=m;j++){
+                //document.write("<br>",i," x ",j," = ", j*i );
+                out += "<tr><td>" + i + "</td><td> x </td><td>" + j + "</td><td> = </td><td>" + (j*i)+ "</td></tr>";
+              }
+              out += "</table></div>";
+            }
+
+            document.getElementById('out').innerHTML= out;
+         }
+
+
+        </script>
+        <button onclick="ixj()">Выводит результат (много текста)</button>
+        <div id="out"></div>
+
+        <br><br>
+      </li>
+      <li>
+        <p>Напишите цикл, выводит такой треугольник:</p>
+        <pre> 
+        <blockquote>
+#
+##
+###
+####
+#####
+######
+#######
+        </blockquote>
+        </pre>
+<p>Решение: </p>
+      <pre><code class="javascript">
+
+function tetra() {
+  for (var i = 1; i <= 7; i++) {
+    for (var j = 1; j <= i; j++) {
+      document.write("#");
+    }
+    document.write("&lt;br&gt;");
+  }
+}
+
+tetra();
+
+      </code></pre>
+
+        <script type="text/javascript">
+          function tetra() {
+            for (var i = 1; i <= 7; i++) {
+              for (var j = 1; j <= i; j++) {
+                document.write("#");
+              }
+              document.write("<br>");
+            }
+         }
+
+         tetra();
+         </script>
+         <br><br>
+      </li>
+      <li>
+      <p>* Напишите программу, создающую строку, содержащую решётку 8х8, в которой линии разделяются символами новой строки. На каждой позиции либо пробел, либо #. В результате должна получиться шахматная доска.</p>
+ 
+      <p>Решение: </p>
+      <pre><code class="javascript">
+
+function shashki() {
+  document.write("&lt;pre&gt;");
+  for (var i = 1; i <= 8; i++) {
+    for (var j = 1; j <= 8; j++) {        
+        if( j%2 == i%2 ){
+          document.write("#");
+        } else {
+          document.write(" ");
+        }
+    }
+    document.write("&lt;br&gt;");
+  }
+  document.write("&lt;/pre&gt;");
+}
+
+shashki();      
+
+      </code></pre>
+
+        <script type="text/javascript">
+          function shashki() {
+            document.write("<pre>");
+            for (var i = 1; i <= 8; i++) {
+              for (var j = 1; j <= 8; j++) {        
+                  if( j%2 == i%2 ){
+                    document.write("#");
+                  } else {
+                    document.write(" ");
+                  }
+              }
+              document.write("<br>");
+            }
+            document.write("</pre>");
+         }
+
+         shashki();
+         </script>
+ 
+      </li>
+     </ul>
+
+    </div>
+
+</body>
+</html>
