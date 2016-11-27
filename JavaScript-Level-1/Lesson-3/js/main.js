@@ -55,10 +55,6 @@ function RandomNumPrint(arr)
    var block;
    for(var i=0 ; i<10 ; i++)
    {
-     //target= document.getElementById('num-'+i );
-     //target.style.animationName = '';
-     //target.style.webkitAnimationName = '';
-     // target.remove();
      if(document.getElementById('num-'+i))
      document.getElementById('num-'+i).remove();
       addDiv(arr[i],i);
@@ -124,23 +120,36 @@ function exchangeItem(arr, more,less) {
 //
 /////////////////////////////////////////////////
 
-function Partition(A, p, r)
+// техническая функция для обмена числами элементами массива
+
+function swap(data, i, j) {
+    if (i!=j)
+      exchangeItem(data,i,j);
+    var tmp = data[i];
+    data[i] = data[j];
+    data[j] = tmp;
+}
+
+
+///////////////////////////////////////
+//
+// Агоритм быстрой сортировки
+//
+//////////////////////////////////////
+
+function Partition(sort, p, r)
 {
-        var x = A[r];
-        var i=p-1;
-        for(var j=p; j<=r ;j++ )
+    var i = p - 1;
+ 
+    for(var j=p; j<=r ;j++ )
+    {
+        if(sort[j] <= sort[r])
         {
-                if(A[j] <= x)
-                {
-                        i++;
-                        var temp = A[i];
-                        A[i] = A[j];
-                        A[j] = temp;
-                        if (i!=j)
-                       exchangeItem(A,i,j);
-                }
+          i++;
+          swap(sort, i, j);
         }
-        return i<r ?i : i-1;
+    }
+    return ( i<r ) ? i : i-1;
 }
 
 ///////////////////////////////////////
@@ -150,13 +159,13 @@ function Partition(A, p, r)
 //////////////////////////////////////
 
 
-function QuickSort(A, p, r)
+function QuickSort(sort, p, r)
 {
-        if(p<r)
+        if( p < r )
         {
-                var q = Partition(A, p, r);
-                QuickSort(A, p, q);
-                QuickSort(A, q+1, r);
+                var q = Partition(sort, p, r);
+                QuickSort(sort, p, q);
+                QuickSort(sort, q+1, r);
         }
 }
 
@@ -169,22 +178,23 @@ function QuickSort(A, p, r)
 
 
 
-function shellSort (a) {
-    for (var h = a.length; h = parseInt(h / 2);) {
-        for (var i = h; i < a.length; i++) {
+function shellSort (sort) {
+    var step = parseInt(sort.length / 2);
 
-            var k = a[i];
-
-            for (var j = i; j >= h && k < a[j - h]; j -= h)
-            {
-                a[j] = a[j - h];
-                exchangeItem(a,j-h,j);
-            }
-
-            a[j] = k;
-        }
-    }
-    return a;
+    while (step > 0)//пока шаг не 0
+    {
+      for (var i = 0; i < sort.length - step; i++)
+      {
+          var j = i;
+          //будем идти начиная с i-го элемента
+          while (j >= 0 && sort[j] > sort[j + step])
+          {
+              swap(sort, j, j + step);
+              j-=1; 
+          }
+      }
+      step = parseInt(step / 2);//уменьшаем шаг
+    }  
 }
 
 
@@ -193,87 +203,59 @@ function shellSort (a) {
 //
 // Пиромидальная сортировка
 //
-//////////////////////////////////////////////
+/////////////////////////////////////////////
+ 
 
-function swap(data, i, j) {
-    exchangeItem(data,i,j);
-    var tmp = data[i];
-    data[i] = data[j];
-    data[j] = tmp;
-}
- 
- function heap_sort(arr) {
-    put_array_in_heap_order(arr);
-    end = arr.length - 1;
-    while(end > 0) {
-        swap(arr, 0, end);
-        sift_element_down_heap(arr, 0, end);
-        end -= 1
+function siftDown(sort, root, bottom) {
+  var maxChild, temp;
+  var done = 0;
+  while ((root*2 <= bottom) && (!done)) {
+    
+    if (root*2 == bottom) {
+      maxChild = root * 2;
     }
-}
- 
-function put_array_in_heap_order(arr) {
-    var i;
-    i = arr.length / 2 - 1;
-    i = Math.floor(i);
-    while (i >= 0) {
-        sift_element_down_heap(arr, i, arr.length);
-        i -= 1;
+    else if (sort[root * 2] > sort[root * 2 + 1]) {
+      maxChild = root * 2;
     }
-}
- 
-function sift_element_down_heap(heap, i, max) {
-    var i_big, c1, c2;
-    while(i < max) {
-        i_big = i;
-        c1 = 2*i + 1;
-        c2 = c1 + 1;
-        if (c1 < max && heap[c1] > heap[i_big])
-            i_big = c1;
-        if (c2 < max && heap[c2] > heap[i_big])
-            i_big = c2;
-        if (i_big == i) return;
-        swap(heap,i, i_big);
-        i = i_big;
+    else {
+      maxChild = root * 2 + 1;
     }
+
+    if (sort[root] < sort[maxChild]) {
+
+      swap(sort, root, maxChild) ;
+
+      root = maxChild;
+    }  else
+      done = 1;
+  }
 }
 
-function animSort() {
 
-     
+function heapSort(sort) {
   
-   idFrame = 0; // для подсчета перемещений
-   currentAnimationId = 1;
- // if (keyframeContainer)
-  // keyframeContainer.remove();
-   keyframeContainer = document.createElement('style');
-   RandomNumPrint(arr);
- // QuickSort(arr, 0, 9);
-  // shellSort(arr);
-   
-    heap_sort(arr);
-   // exchangeItem(arr,5,1);
-   // exchangeItem(arr,8,1);
+  var temp;
+
+  // построение дерева
+  for (var i = arr.length/2 - 1; i >= 0; i--)
+  {
+    siftDown(sort, i, arr.length);
+  }
+
+  for (var i = arr.length - 1; i >= 1; i--) {
+    swap(sort, 0, i) ;
+    siftDown(sort, 0, i-1);
+  }
 }
+
 
 function animSort1() {
-
-     
-  
    idFrame = 0; // для подсчета перемещений
    currentAnimationId = 1;
- // if (keyframeContainer)
-  // keyframeContainer.remove();
    keyframeContainer = document.createElement('style');
    RandomNumPrint(arr);
- // QuickSort(arr, 0, 9);
-  // shellSort(arr);
-   
-    heap_sort(arr);
-   // exchangeItem(arr,5,1);
-   // exchangeItem(arr,8,1);
+   heapSort(arr);
 }
-
 
 function animSort2() {
    idFrame = 0; // для подсчета перемещений
@@ -291,10 +273,14 @@ function animSort3() {
    shellSort(arr);
  }
 
+// Возвращение несортированного массива.
+
 function animSort4() {
   arr = arr_old.slice(); 
   RandomNumPrint(arr);
 }
+
+// Создать новый несортированный массив.
 
 function animSort5() {
   arr=getRandomArray();

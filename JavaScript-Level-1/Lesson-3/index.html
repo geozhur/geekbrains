@@ -268,260 +268,116 @@ document.write('-1 ', isEven(-1));
       <form name="myform" id="myform">
       Введите число: <br><br>
       <input type="text" id="userEntry" size="15" class="form-control" value=""> 
-      <button type="button" name="Multiplication" class="btn btn-default btn-lg" onclick="mult()">*</button>
-       <button type="button" name="Division" class="btn btn-default btn-lg" onclick="division()">/</button>
-      <button type="button" name="Minus" class="btn btn-default btn-lg" onclick="minus()">-</button>
-      <button type="button" name="Plus" class="btn btn-default btn-lg" onclick="plus()">+</button>
+      <button type="button" name="Multiplication" class="btn btn-default btn-lg" onclick="calc('*')">*</button>
+       <button type="button" name="Division" class="btn btn-default btn-lg" onclick="calc('/')">/</button>
+      <button type="button" name="Minus" class="btn btn-default btn-lg" onclick="calc('-')">-</button>
+      <button type="button" name="Plus" class="btn btn-default btn-lg" onclick="calc('+')">+</button>
       <button type="button" name="Calc" class="btn btn-default btn-lg" onclick="end()">=</button>
       <button type="button" name="Clean" class="btn btn-default btn-lg" onclick="clean()">C</button>
       </form>
       <pre><code>
-var buff=test;
-var result=0;
-var first=false;
-
-function test() {}
-function plus() {
-  var x = + document.getElementById(&quot;userEntry&quot;).value;
-  
-  if(buff != plus &amp;&amp; buff != test)
-  {
-   buff();
-   buff = plus;
-   return;
-  }
-
-
-  buff = plus;
-  if(first)
-  {
-    result = result + x;
-    document.getElementById(&quot;userEntry&quot;).value = String(result);
-  }
-  else
-  {  
-    first = true;
-    result =  x;
-    document.getElementById(&quot;userEntry&quot;).value =  String(result);  
-  }
-}
-
-function minus() {
-  var x = + document.getElementById(&quot;userEntry&quot;).value;
-
-  if(buff != minus &amp;&amp; buff != test)
-  {
-   buff();
-   buff = minus;
-   return;
-  }
-
-  buff = minus;
-
-  if(first)
-  {
-    result = result - x;
-    document.getElementById(&quot;userEntry&quot;).value = String(result);
-  }
-  else
-  {  
-    first = true;
-    result =  x;
-    document.getElementById(&quot;userEntry&quot;).value =  String(result);  
-  }      
-}
-
-function mult() {
-  var x = + document.getElementById(&quot;userEntry&quot;).value;
-  
-  if(buff != mult &amp;&amp; buff != test)
-  {
-   buff();
-   buff = mult;
-   return;
-  }
- 
-  buff = mult;
-  
-  if(first)
-  {
-    result = result * x;
-    document.getElementById(&quot;userEntry&quot;).value = String(result);
-  }
-  else
-  {  
-    first = true;
-    result =  x;
-    document.getElementById(&quot;userEntry&quot;).value =  String(result);  
-  }
-   
-
-}
-
-function division() {
-  var x = + document.getElementById(&quot;userEntry&quot;).value;
-  
-
-
- if(buff != division &amp;&amp; buff != test)
-{
-    buff();
-    buff = division;
-   return;
- }
-
-   
- buff = division;
-
-  if(first)
-  {
-    result = result / x;
-    document.getElementById(&quot;userEntry&quot;).value = String(result);
-  }
-  else
-  {  
-    first = true;
-    result =  x;
-    document.getElementById(&quot;userEntry&quot;).value =  String(result);  
-  }
-}
-
-function clean() {
-  result = 0;
-  buff=test;
-  first = false;
-  document.getElementById(&quot;userEntry&quot;).value = 0;
-}
-
-function end() {  
-  buff();
-  result = 0;
-  buff=test;
-  first = false;
-}       
-      </code></pre>
-        <script type="text/javascript">
-        var buff=test;
+        var buff=&quot;test&quot;;
         var result=0;
         var first=false;
 
-        function test() {}
-        function plus() {
-          var x = + document.getElementById("userEntry").value;
-          
-          if(buff != plus && buff != test)
-          {
-           buff();
-           buff = plus;
-           return;
-          }
-
-
-          buff = plus;
-          if(first)
-          {
-            result = result + x;
-            document.getElementById("userEntry").value = String(result);
-          }
-          else
-          {  
-            first = true;
-            result =  x;
-            document.getElementById("userEntry").value =  String(result);  
-          }
-        }
-
-        function minus() {
-          var x = + document.getElementById("userEntry").value;
-
-          if(buff != minus && buff != test)
-          {
-           buff();
-           buff = minus;
-           return;
-          }
-
-          buff = minus;
-
-          if(first)
-          {
-            result = result - x;
-            document.getElementById("userEntry").value = String(result);
-          }
-          else
-          {  
-            first = true;
-            result =  x;
-            document.getElementById("userEntry").value =  String(result);  
-          }      
-        }
-
-        function mult() {
-          var x = + document.getElementById("userEntry").value;
-          
-          if(buff != mult && buff != test)
-          {
-           buff();
-           buff = mult;
-           return;
-          }
-         
-          buff = mult;
-          
-          if(first)
-          {
-            result = result * x;
-            document.getElementById("userEntry").value = String(result);
-          }
-          else
-          {  
-            first = true;
-            result =  x;
-            document.getElementById("userEntry").value =  String(result);  
-          }
-           
-
-        }
-
-        function division() {
-          var x = + document.getElementById("userEntry").value;
-          
-
-
-         if(buff != division && buff != test)
-        {
-            buff();
-            buff = division;
-           return;
-         }
         
-           
-         buff = division;
+        function calc(znak) {
+
+          var x = + document.getElementById(&quot;userEntry&quot;).value;
+          
+          if(buff != znak &amp;&amp; buff != &quot;test&quot;)
+          {
+           calc(buff);
+           buff = znak;
+           return;
+          }
+
+          buff = znak;
 
           if(first)
           {
-            result = result / x;
-            document.getElementById("userEntry").value = String(result);
+
+            switch(znak) {
+              case &quot;+&quot; : result = result + x; break;
+              case &quot;-&quot; : result = result - x; break;
+              case &quot;/&quot; : result = result / x; break;
+              case &quot;*&quot; : result = result * x; break;
+            }
+
           }
           else
           {  
             first = true;
             result =  x;
-            document.getElementById("userEntry").value =  String(result);  
           }
+
+          document.getElementById(&quot;userEntry&quot;).value = String(result); 
         }
 
         function clean() {
           result = 0;
-          buff=test;
+          buff=&quot;test&quot;;
+          first = false;
+          document.getElementById(&quot;userEntry&quot;).value = 0;
+        }
+
+        function end() {  
+          calc(buff);
+          result = 0;
+          buff=&quot;test&quot;;
+          first = false;
+        }      
+      </code></pre>
+        <script type="text/javascript">
+        var buff="test";
+        var result=0;
+        var first=false;
+
+        
+        function calc(znak) {
+
+          var x = + document.getElementById("userEntry").value;
+          
+          if(buff != znak && buff != "test")
+          {
+           calc(buff);
+           buff = znak;
+           return;
+          }
+
+          buff = znak;
+
+          if(first)
+          {
+
+            switch(znak) {
+              case "+" : result += x; break;
+              case "-" : result -= x; break;
+              case "/" : result /= x; break;
+              case "*" : result *= x; break;
+            }
+
+          }
+          else
+          {  
+            first = true;
+            result =  x;
+          }
+
+          document.getElementById("userEntry").value = String(result); 
+        }
+
+        function clean() {
+          result = 0;
+          buff="test";
           first = false;
           document.getElementById("userEntry").value = 0;
         }
 
         function end() {  
-          buff();
+          calc(buff);
           result = 0;
-          buff=test;
+          buff="test";
           first = false;
         }
 
