@@ -32,7 +32,7 @@
       <pre><code class="javascript">
 function isPowerTwo (N) {
 
-  if ( N == 2 ){
+  if ( N == 2 || N == 1){
     return true;
   } else if ( N%2 ==0 &amp;&amp; isPowerTwo (N/2)) {
     return true;
@@ -54,7 +54,7 @@ console.log("32",isPowerTwo(32));
 
           function isPowerTwo (N) {
 
-            if ( N == 2 ){
+            if ( N == 2 || N == 1){
               return "YES";
             } else if ( N%2 ==0 && isPowerTwo (N/2) == "YES") {
               return "YES";
@@ -65,6 +65,8 @@ console.log("32",isPowerTwo(32));
 
           console.log("132",isPowerTwo(132));
           console.log("32",isPowerTwo(32));
+          console.log("8",isPowerTwo(8));
+          console.log("9",isPowerTwo(9));
         </script>
    
         
