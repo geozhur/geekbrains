@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Урок 4 - javascript-1 </title>
+  <meta name="author" content="Журавлев Георгий">
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+	<link  href="libs/highlight/styles/hybrid.css" rel="stylesheet">
+	<script src="libs/highlight/highlight.pack.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+
+  
+
+
+</head>
+<body>	
+ 	<div class="container">
+	 <div class="page-header">
+        <h1>Урок номер 4</h1>
+   </div>
+     <ul>
+      <li>
+
+        <blockquote>
+      Задача 1.<br>
+      Дано натуральное число N. Выведите слово YES, если число N является точной  степенью двойки, или слово NO в противном случае. Операцией возведения в степень пользоваться нельзя!<br>
+
+        </blockquote>
+        <p>Результат: 
+
+      <pre><code class="javascript">
+function isPowerTwo (N) {
+
+  if ( N == 2 ){
+    return true;
+  } else if ( N%2 ==0 &amp;&amp; isPowerTwo (N/2)) {
+    return true;
+  }
+  return false;
+
+}
+
+
+console.log("132",isPowerTwo(132));
+console.log("32",isPowerTwo(32));
+
+      </code></pre>
+
+
+        <strong>
+
+        <script type="text/javascript">
+
+          function isPowerTwo (N) {
+
+            if ( N == 2 ){
+              return "YES";
+            } else if ( N%2 ==0 && isPowerTwo (N/2) == "YES") {
+              return "YES";
+            }
+
+            return "NO";
+          }
+
+          console.log("132",isPowerTwo(132));
+          console.log("32",isPowerTwo(32));
+        </script>
+   
+        
+
+
+        </strong>
+        </p>
+
+      </li>
+      <li>
+        <blockquote>
+      Задача 2.<br>
+      Дано натуральное число N. Вычислите сумму его цифр.При решении этой задачи нельзя использовать строки, списки, массивы (ну и циклы, разумеется).
+        </blockquote>      
+      </li>
+
+        <p>Результат: 
+
+      <pre><code class="javascript">
+
+function sumDigits (N) {
+   
+  N = parseInt(N);
+
+  if ( N ){
+    return (N%10 + sumDigits (N/10));
+  } else {
+    return N;
+  }
+
+}
+
+
+console.log("197843",sumDigits(197843));
+      </code></pre>
+
+
+        <strong>
+
+        <script type="text/javascript">
+
+          function sumDigits (N) {
+            
+            N = parseInt(N);
+                         
+            if ( N ) {
+              return (N%10 + sumDigits (N/10));
+            } else {
+              return N;
+            }
+
+          }
+
+        console.log("197843",sumDigits(197843));
+        </script>
+   
+        </strong>
+        </p>
+
+
+     </ul>
+
+    </div>
+</body>
+</html>
