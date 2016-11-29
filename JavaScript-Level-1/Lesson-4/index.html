@@ -30,20 +30,19 @@
         <p>Результат: 
 
       <pre><code class="javascript">
-function isPowerTwo (N) {
-
-  if ( N == 2 || N == 1){
-    return true;
-  } else if ( N%2 ==0 &amp;&amp; isPowerTwo (N/2)) {
-    return true;
-  }
-  return false;
-
+if ( N == 2 || N == 1){
+  return &quot;YES&quot;;
+} else if ( N%2 ==0 &amp;&amp; isPowerTwo (N/2) == &quot;YES&quot;) {
+  return &quot;YES&quot;;
 }
 
+return &quot;NO&quot;;
+}
 
-console.log("132",isPowerTwo(132));
-console.log("32",isPowerTwo(32));
+console.log(&quot;132&quot;,isPowerTwo(132));
+console.log(&quot;32&quot;,isPowerTwo(32));
+console.log(&quot;8&quot;,isPowerTwo(8));
+console.log(&quot;9&quot;,isPowerTwo(9));
 
       </code></pre>
 
