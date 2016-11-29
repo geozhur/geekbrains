@@ -30,19 +30,20 @@
         <p>Результат: 
 
       <pre><code class="javascript">
-if ( N == 2 || N == 1){
-  return &quot;YES&quot;;
-} else if ( N%2 ==0 &amp;&amp; isPowerTwo (N/2) == &quot;YES&quot;) {
-  return &quot;YES&quot;;
-}
+function isPowerTwo (N) {
 
-return &quot;NO&quot;;
+  if ( N == 2 || N == 1 || (N%2 ==0 &amp;&amp; isPowerTwo (N/2) == &quot;YES&quot;) ){
+    return &quot;YES&quot;;
+  } 
+
+  return &quot;NO&quot;;
 }
 
 console.log(&quot;132&quot;,isPowerTwo(132));
 console.log(&quot;32&quot;,isPowerTwo(32));
 console.log(&quot;8&quot;,isPowerTwo(8));
 console.log(&quot;9&quot;,isPowerTwo(9));
+
 
       </code></pre>
 
@@ -53,11 +54,9 @@ console.log(&quot;9&quot;,isPowerTwo(9));
 
           function isPowerTwo (N) {
 
-            if ( N == 2 || N == 1){
+            if ( N == 2 || N == 1 || (N%2 ==0 && isPowerTwo (N/2) == "YES") ){
               return "YES";
-            } else if ( N%2 ==0 && isPowerTwo (N/2) == "YES") {
-              return "YES";
-            }
+            } 
 
             return "NO";
           }
