@@ -35,7 +35,7 @@ window.onload = function() {
     canvas.height = window.innerHeight; 
     document.body.insertBefore(canvas, document.body.firstChild);
 
-    setTimeout("drawArc()", 5);
+    setTimeout("drawSpiral()", 5);
 } 
 
 function drawArc() {
@@ -52,6 +52,23 @@ function drawArc() {
     setTimeout("drawArc()", 5);
 }
 
+function drawSpiral() {
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    context.lineWidth = canvas.width/4;
+    context.moveTo(canvas.width/2,canvas.height/2);
+    context.beginPath();
+    for (i = radius; i < 720; i++) {
+        angle = 0.1 * i;
+        x = canvas.width/2 + (20 * angle) * Math.cos(angle);
+        y = canvas.height/2 + (20 * angle) * Math.sin(angle);
+
+        context.lineTo(x, y);
+    }
+    context.strokeStyle = "rgba(255,255,255,0.8)";
+    context.stroke();
+    radius += 1;
+    setTimeout("drawSpiral()", 5);
+}
 
   </script>	
  	<div class="container">
@@ -641,7 +658,8 @@ console.log(pick(user, [&#039;name&#039;, &#039;friends&#039;]));
       <li>
       <blockquote>
       Реализованна анимация при загрузке страницы. Если обновить страницу, то видно. Код 
-      находится сразу после body.
+      находится сразу после body. В функции window.onload можно использовать либо drawSpiral() (стирается по спирали),
+      либо drawArc() (стирается кругами)
       </blockquote> 
       <pre><code>
 var canvas;
@@ -660,7 +678,7 @@ window.onload = function() {
     canvas.height = window.innerHeight; 
     document.body.insertBefore(canvas, document.body.firstChild);
 
-    setTimeout(&quot;drawArc()&quot;, 5);
+    setTimeout(&quot;drawSpiral()&quot;, 5);
 } 
 
 function drawArc() {
@@ -675,6 +693,24 @@ function drawArc() {
     if(radius &gt; canvas.width)
       return 0;
     setTimeout(&quot;drawArc()&quot;, 5);
+}
+
+function drawSpiral() {
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    context.lineWidth = canvas.width/4;
+    context.moveTo(canvas.width/2,canvas.height/2);
+    context.beginPath();
+    for (i = radius; i &lt; 720; i++) {
+        angle = 0.1 * i;
+        x = canvas.width/2 + (20 * angle) * Math.cos(angle);
+        y = canvas.height/2 + (20 * angle) * Math.sin(angle);
+
+        context.lineTo(x, y);
+    }
+    context.strokeStyle = &quot;rgba(255,255,255,0.8)&quot;;
+    context.stroke();
+    radius += 1;
+    setTimeout(&quot;drawSpiral()&quot;, 5);
 }
 
       </code></pre>
