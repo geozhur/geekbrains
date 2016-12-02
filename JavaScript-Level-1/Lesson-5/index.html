@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Урок 5 - javascript-1 </title>
+  <meta name="author" content="Журавлев Георгий">
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+	<link  href="libs/highlight/styles/hybrid.css" rel="stylesheet">
+	<script src="libs/highlight/highlight.pack.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+
+  
+
+
+</head>
+<body>	
+ 	<div class="container">
+	 <div class="page-header">
+        <h1>Урок номер 5</h1>
+   </div>
+     <ul>
+      <li>
+
+        <blockquote>
+      Написать функцию преобразования цвета из 10-ного представления в 16-ный. Функция
+должна принимать 3 числа от 0 до 255 и возвращать строковый хеш.
+
+        </blockquote>
+        <p>Результат: 
+
+      <pre><code class="javascript">
+function parseColor(C) {
+    
+    C = parseInt(C,10);
+
+    if(isNaN(C)) {
+      return &quot;00&quot;;
+    }
+
+    if(C &gt;=0 &amp;&amp; C&lt;256) {
+     return C.toString(16);
+    }
+
+    return &quot;255&quot;;
+}
+
+function RGBtoHex(R,G,B) {
+  return (parseColor(R)+parseColor(G)+parseColor(B));
+}
+
+function RGBtoHexConvert() {
+
+  var R = document.getElementById(&quot;R&quot;).value;
+  var G = document.getElementById(&quot;G&quot;).value;
+  var B = document.getElementById(&quot;B&quot;).value;
+
+ document.getElementById(&quot;hexDIV&quot;).innerHTML =  &quot;Hex: #&quot;+RGBtoHex(R,G,B); 
+}
+
+
+      </code></pre>
+
+
+        <strong>
+
+        <script type="text/javascript">
+
+          function parseColor(C) {
+              
+              C = parseInt(C,10);
+
+              if(isNaN(C)) {
+                return "00";
+              }
+
+              if(C >=0 && C<256) {
+               return C.toString(16);
+              }
+
+              return "255";
+          }
+
+          function RGBtoHex(R,G,B) {
+            return (parseColor(R)+parseColor(G)+parseColor(B));
+          }
+          
+          function RGBtoHexConvert() {
+
+            var R = document.getElementById("R").value;
+            var G = document.getElementById("G").value;
+            var B = document.getElementById("B").value;
+
+           document.getElementById("hexDIV").innerHTML =  "Hex: #"+RGBtoHex(R,G,B); 
+          }
+
+
+        </script>
+   
+         <form name="RGBRorm" id="RGBRorm" class="form-inline">
+         <div class="form-group">
+          <label for="R">R:</label>
+          <input type="text" id="R" size="3" class="form-control" value="" name="R"> 
+          <label for="G">G:</label>
+          <input type="text" id="G" size="3" class="form-control" value="" name="G"> 
+          <label for="B">B:</label>
+          <input type="text" id="B" size="3" class="form-control" value="" name="B"> 
+        </div>
+        <button type="button" name="ConvertRGBtoHex" class="btn btn-default btn-lg" onclick="RGBtoHexConvert()">Convert RGB to Hex</button>
+        </form>
+        <dir id="hexDIV"><div>
+
+
+        </strong>
+        </p>
+
+      </li>
+      <li>
+      <blockquote>
+        Написать функцию, преобразующую число в объект. Передавая на вход число от 0 до 999, мыдолжны получить на выходе объект, в котором в соответствующих свойствах описаны единицы, десятки и сотни. Например для числа 245 мы должны получить следующий объект:{‘единицы’: 5, ‘десятки’: 4, 'сотни’: 2}. Если число превышает 999, необходимо выдать соответствующее сообщение с помощью console.log и вернуть пустой объект.
+      </blockquote>
+        <p>Решение: 
+
+      <pre><code class="javascript">
+
+  function CutNumber(Number) {
+
+    this.init = function(Num) {
+        if( 0 &lt; parseInt(Num) &amp;&amp; parseInt(Num)&lt; 1000) {
+            this.&#x441;&#x43e;&#x442;&#x43d;&#x438; = parseInt(Num/100);
+            this.&#x434;&#x435;&#x441;&#x44f;&#x442;&#x43a;&#x438; = parseInt((Num - this.&#x441;&#x43e;&#x442;&#x43d;&#x438;*100)/10);
+            this.&#x435;&#x434;&#x438;&#x43d;&#x438;&#x446;&#x44b; = parseInt(Num-this.&#x434;&#x435;&#x441;&#x44f;&#x442;&#x43a;&#x438;*10 - this.&#x441;&#x43e;&#x442;&#x43d;&#x438;*100);
+        } else {
+          if(typeof(this.&#x435;&#x434;&#x438;&#x43d;&#x438;&#x446;&#x44b;) != &quot;undefined&quot;) {
+            delete this.&#x441;&#x43e;&#x442;&#x43d;&#x438;;
+            delete this.&#x434;&#x435;&#x441;&#x44f;&#x442;&#x43a;&#x438;;
+            delete this.&#x435;&#x434;&#x438;&#x43d;&#x438;&#x446;&#x44b;;
+          }
+        }
+      }
+
+    this.init(Number);
+  }
+
+
+  var testNum = new CutNumber(256);
+  console.log(testNum); 
+  testNum.init(543);
+  console.log(testNum); 
+  testNum.init(232432);
+  console.log(testNum);
+
+  var testNum2 = new CutNumber(2526);
+  console.log(testNum2);
+      </code></pre>
+        <strong>
+          <script type="text/javascript">
+
+          function CutNumber(Number) {
+
+            this.init = function(Num) {
+                if( 0 < parseInt(Num) && parseInt(Num)< 1000) {
+                    this.сотни = parseInt(Num/100);
+                    this.десятки = parseInt((Num - this.сотни*100)/10);
+                    this.единицы = parseInt(Num-this.десятки*10 - this.сотни*100);
+                } else {
+                  if(typeof(this.единицы) != "undefined") {
+                    delete this.сотни;
+                    delete this.десятки;
+                    delete this.единицы;
+                  }
+                }
+              }
+
+            this.init(Number);
+          }
+
+
+          var testNum = new CutNumber(256);
+          console.log(testNum); 
+          testNum.init(543);
+          console.log(testNum); 
+          testNum.init(232432);
+          console.log(testNum);
+
+          var testNum2 = new CutNumber(2526);
+          console.log(testNum2);
+
+
+          </script>        
+
+        </strong>
+        </p>
+      </li>
+      <li>
+      <blockquote>
+       * Реализовать функцию objectToQueryString(object), которая принимает аргументом объект, возвращает строку. Примеры работы:
+      </blockquote>
+      <pre><code>
+console.log(objectToQueryString({user: 'Dmitry'})); 
+//user=Dmitry
+console.log(objectToQueryString({user: 'Dmitry', password: 'pass'})); 
+//user=Dmitry&password=pass
+console.log(objectToQueryString({user: 'Dmitry', password:'pass', id=1})); 
+// user=Dmitry&password=pass&id=1
+      </code></pre>
+        <p>Решение: 
+
+      <pre><code class="javascript">
+
+function objectToQueryString(object) {
+  var params = "";
+  for (var key in object) {
+    if (object.hasOwnProperty(key)) {
+      params += key + "=" + object[key]+ "&";
+    }
+  }
+ 
+  if(params !="") {
+   params = params.substring(0, params.length-1);;
+  }
+
+  return params;
+
+}
+
+console.log(objectToQueryString({user: 'Dmitry'})); 
+console.log(objectToQueryString({user: 'Dmitry', password: 'pass'})); 
+console.log(objectToQueryString({user: 'Dmitry', password: 'pass', id: 1}));
+
+
+      </code></pre>
+        <strong>  
+          <script type="text/javascript">
+
+          function objectToQueryString(object) {
+            var params = "";
+            for (var key in object) {
+              if (object.hasOwnProperty(key)) {
+                params += key + "=" + object[key]+ "&";
+              }
+            }
+           
+            if(params !="") {
+             params = params.substring(0, params.length-1);;
+            }
+
+            return params;
+
+          }
+
+          console.log(objectToQueryString({user: 'Dmitry'})); 
+          console.log(objectToQueryString({user: 'Dmitry', password: 'pass'})); 
+          console.log(objectToQueryString({user: 'Dmitry', password: 'pass', id: 1}));
+          </script>
+        </strong>
+        </p>
+      </li>
+      <li>
+      <blockquote>
+   Объекты могут быть использованы для построения различных структур данных. Часто встречающаяся структура – список (не путайте с массивом). Список – связанный набор объектов, где первый объект содержит ссылку на второй, второй – на третий, и т.п.
+<blockquote>
+var list = { value: 1, rest: { value: 2, rest: {
+value: 3, rest: null } } };
+</blockquote>
+Списки удобны тем, что они могут делиться частью своей структуры. Например, можно сделать два списка, {value: 0, rest: list} и {value: -1, rest: list}, где list – это ссылка на ранее объявленную
+переменную. Это два независимых списка, при этом у них есть общая структура list, которая включает
+три последних элемента каждого из них. Кроме того, оригинальный список также сохраняет свои
+свойства как отдельный список из трёх элементов. Напишите функцию arrayToList, которая строит
+такую структуру, получая в качестве аргумента [1, 2, 3], а также функцию listToArray, которая создаёт
+массив из списка. Также напишите вспомогательную функцию prepend, которая получает элемент и
+создаёт новый список, где этот элемент добавлен спереди к первоначальному списку, и функцию nth,
+которая в качестве аргументов принимает список и число, а возвращает элемент на заданной
+позиции в списке, или же undefined в случае отсутствия такого элемента.
+      </blockquote>
+  <p>Решение: 
+
+      <pre><code class="javascript">
+//
+// &#x41f;&#x440;&#x435;&#x43e;&#x431;&#x440;&#x430;&#x437;&#x443;&#x435;&#x43c; &#x43c;&#x430;&#x441;&#x441;&#x438;&#x432; &#x432; &#x441;&#x43f;&#x438;&#x441;&#x43e;&#x43a;
+//
+//
+
+function arrayToList(arr) {
+  
+  var list = { 
+    value: arr[0], 
+    rest: null
+  }
+  
+  var list0 = list;
+    
+  for (i=1; i&lt;arr.length; i++) {
+    list.rest = new Object();
+    list.rest.value = arr[i];
+    list.rest.rest = null;  
+    list = list.rest ;
+  }
+  
+  return list0;
+
+}
+
+//
+// &#x41f;&#x440;&#x435;&#x43e;&#x431;&#x440;&#x430;&#x437;&#x443;&#x435;&#x43c; &#x441;&#x43f;&#x438;&#x441;&#x43e;&#x43a; &#x432; &#x43c;&#x430;&#x441;&#x441;&#x438;&#x432;
+//
+
+
+function listToArray(list) {
+  var arr = [];
+
+  arr.push (list.value);
+  while (list.rest != null) {
+    list = list.rest;
+    arr.push(list.value);
+  }
+
+  return arr;
+}
+
+// 
+// &#x414;&#x43e;&#x431;&#x430;&#x432;&#x43b;&#x44f;&#x435;&#x43c; &#x44d;&#x43b;&#x435;&#x43c;&#x435;&#x43d;&#x442; item &#x432;&#x43d;&#x430;&#x447;&#x430;&#x43b;&#x435;
+// &#x441;&#x43f;&#x438;&#x441;&#x43a;&#x430; list
+//
+function prepend(list, item) {
+
+  item.rest = list;
+  return item;
+
+}
+
+//
+// &#x418;&#x437; &#x441;&#x43f;&#x438;&#x441;&#x43a;&#x430; list &#x431;&#x435;&#x440;&#x435;&#x43c; &#x44d;&#x43b;&#x435;&#x43c;&#x435;&#x43d;&#x442; N
+// &#x41d;&#x443;&#x43c;&#x435;&#x440;&#x430;&#x446;&#x438;&#x44f; &#x43d;&#x430;&#x447;&#x438;&#x43d;&#x430;&#x435;&#x442;&#x441;&#x44f; &#x441; 0
+//
+//
+
+function nth(list, N) {
+
+  var i=0;
+
+  while (i&lt;N &amp;&amp; list.rest != null) {
+    list = list.rest;
+    i++;
+  }
+  
+  if(N &gt; i)
+    return &quot;undefined&quot;;
+  
+  return list;
+}
+
+l = arrayToList([1,21,34,4]);
+
+console.log(listToArray(l));
+console.log(l.value ,l.rest.value, l.rest.rest.value, l.rest.rest.rest.value);
+console.log(nth(l, 4));
+
+var item = { 
+    value: 23, 
+    rest: null
+}
+
+l=prepend(l, item);
+console.log(listToArray(l));
+
+console.log(nth(l, 4));
+      
+       </code></pre>
+        <strong>  
+          <script type="text/javascript">
+
+
+          //
+          // Преобразуем массив в список
+          //
+          //
+
+          function arrayToList(arr) {
+            
+            var list = { 
+              value: arr[0], 
+              rest: null
+            }
+            
+            var list0 = list;
+              
+            for (i=1; i<arr.length; i++) {
+              list.rest = new Object();
+              list.rest.value = arr[i];
+              list.rest.rest = null;  
+              list = list.rest ;
+            }
+            
+            return list0;
+
+          }
+
+          //
+          // Преобразуем список в массив
+          //
+
+          
+          function listToArray(list) {
+            var arr = [];
+
+            arr.push (list.value);
+            while (list.rest != null) {
+              list = list.rest;
+              arr.push(list.value);
+            }
+
+            return arr;
+          }
+
+          // 
+          // Добавляем элемент item вначале
+          // списка list
+          //
+          function prepend(list, item) {
+
+            item.rest = list;
+            return item;
+
+          }
+
+          //
+          // Из списка list берем элемент N
+          // Нумерация начинается с 0
+          //
+          //
+
+          function nth(list, N) {
+
+            var i=0;
+
+            while (i<N && list.rest != null) {
+              list = list.rest;
+              i++;
+            }
+            
+            if(N > i)
+              return "undefined";
+            
+            return list;
+          }
+
+          l = arrayToList([1,21,34,4]);
+          
+          console.log(listToArray(l));
+          console.log(l.value ,l.rest.value, l.rest.rest.value, l.rest.rest.rest.value);
+          console.log(nth(l, 4));
+
+          var item = { 
+              value: 23, 
+              rest: null
+          }
+          
+          l=prepend(l, item);
+          console.log(listToArray(l));
+
+          console.log(nth(l, 4));
+
+
+          </script>
+        </strong>
+      </p>
+      </li>
+
+     <li>
+      <blockquote>
+Напишите две функции, reverseArray и reverseArrayInPlace. Первая получает массив как
+аргумент и выдаёт новый массив, с обратным порядком элементов. Вторая работает как
+оригинальный метод reverse – она меняет порядок элементов на обратный в том массиве,
+который был ей передан в качестве аргумента. Не используйте стандартный метод reverse.      </blockquote>
+  <p>Решение: 
+
+      <pre><code class="javascript">
+function reverseArray(arr) {
+  var arr_out = [];
+  for (var i = 0; i < arr.length; i++) {
+   arr_out[arr.length-i-1] = arr[i];
+  }
+  return arr_out;
+}
+
+function reverseArrayInPlace(arr) {
+  for (var i = 0; i < parseInt(arr.length/2) ; i++) {
+    var temp = arr[i];
+    arr[i] = arr[arr.length - i - 1];
+    arr[arr.length - i - 1] = temp ;
+  }
+}
+
+var arr2 = [2,3,4,5,6,7,8];
+console.log(reverseArray(arr2));
+reverseArrayInPlace(arr2);
+console.log(arr2);
+       </code></pre>
+        <strong>      
+          <script type="text/javascript">
+          function reverseArray(arr) {
+            var arr_out = [];
+            for (var i = 0; i < arr.length; i++) {
+             arr_out[arr.length-i-1] = arr[i];
+            }
+            return arr_out;
+          }
+
+          function reverseArrayInPlace(arr) {
+            for (var i = 0; i < parseInt(arr.length/2) ; i++) {
+              var temp = arr[i];
+              arr[i] = arr[arr.length - i - 1];
+              arr[arr.length - i - 1] = temp ;
+            }
+          }
+
+          var arr2 = [2,3,4,5,6,7,8];
+          console.log(reverseArray(arr2));
+          reverseArrayInPlace(arr2);
+          console.log(arr2);
+          </script>
+        </strong>
+      </p>
+      </li>
+
+     <li>
+      <blockquote>
+* Реализовать функцию pick(obj, keys), которая принимает аргументами объект и массив строк
+(названия ключей). Возвращает новый объект, куда вошли все ключи, указанные в
+массиве keys, и соответствующие значения из объекта obj. Если в объекте obj, нет ключа,
+указанного в массиве keys, в результирующем объекте этот ключ не должен присутствовать.
+    </blockquote> 
+      <pre><code>
+var user = {
+ name: 'Sergey',
+ age: 30,
+ email: 'sergey@gmail.com',
+ friends: ['Sveta', 'Artem']
+}
+
+pick(user, ['name']); // {name: 'Sergey'}
+pick(user, ['name', 'second-name']); // {name: 'Sergey'}
+pick(user, ['name', 'friends']); 
+// {name: 'Sergey', friends:['Sveta','Artem']}
+      </code></pre> 
+<p>Решение: 
+
+      <pre><code class="javascript">
+function pick(list, keys) {
+  var newlist = new Object();
+    for(var key in keys) {
+      var val = keys[key];
+
+      if(list[val] !== undefined) {
+       newlist[val]  = list[val] ;
+      }
+    }
+  return newlist;
+}
+
+var user = {
+ name: &#039;Sergey&#039;,
+ age: 30,
+ email: &#039;sergey@gmail.com&#039;,
+ friends: [&#039;Sveta&#039;, &#039;Artem&#039;]
+}
+
+console.log(pick(user, [&#039;name&#039;])); // {name: &#039;Sergey&#039;}
+console.log(pick(user, [&#039;name&#039;, &#039;second-name&#039;,&#039;wewewew&#039;])); // {name: &#039;Sergey&#039;}
+console.log(pick(user, [&#039;name&#039;, &#039;friends&#039;]));          
+
+       </code></pre>
+        <strong>      
+          <script type="text/javascript">
+          function pick(list, keys) {
+            var newlist = new Object();
+              for(var key in keys) {
+                var val = keys[key];
+
+                if(list[val] !== undefined) {
+                 newlist[val]  = list[val] ;
+                }
+              }
+            return newlist;
+          }
+
+          var user = {
+           name: 'Sergey',
+           age: 30,
+           email: 'sergey@gmail.com',
+           friends: ['Sveta', 'Artem']
+          }
+
+          console.log(pick(user, ['name'])); // {name: 'Sergey'}
+          console.log(pick(user, ['name', 'second-name','wewewew'])); // {name: 'Sergey'}
+          console.log(pick(user, ['name', 'friends']));          
+          </script>
+        </strong>
+      </p>
+      </li>      
+     </ul>
+
+    </div>
+</body>
+</html>
