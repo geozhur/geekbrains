@@ -10,11 +10,50 @@
 	<script src="libs/highlight/highlight.pack.js"></script>
 	<script>hljs.initHighlightingOnLoad();</script>
 
-  
+
 
 
 </head>
-<body>	
+<body>
+  <script type="text/javascript">
+
+
+
+var canvas;
+var context;
+var radius = 0;
+
+window.onload = function() {
+
+    canvas = document.createElement('canvas'); 
+    context = canvas.getContext("2d");  
+    canvas.style.position = 'fixed'; 
+    canvas.style.top = '0px'; 
+    canvas.style.left = '0px'; 
+    canvas.style.zIndex = '100'; 
+    canvas.width = window.innerWidth; 
+    canvas.height = window.innerHeight; 
+    document.body.insertBefore(canvas, document.body.firstChild);
+
+    setTimeout("drawArc()", 5);
+} 
+
+function drawArc() {
+
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    context.beginPath();
+    context.lineWidth = canvas.width - radius;
+    context.strokeStyle = "rgba(255,255,255,0.8)";
+    context.arc(canvas.width/2,canvas.height/2,canvas.width/2 + radius,0,Math.PI*2,true); 
+    context.stroke();
+    radius += 1;
+    if(radius > canvas.width)
+      return 0;
+    setTimeout("drawArc()", 5);
+}
+
+
+  </script>	
  	<div class="container">
 	 <div class="page-header">
         <h1>Урок номер 5</h1>
@@ -365,7 +404,7 @@ l=prepend(l, item);
 console.log(listToArray(l));
 
 console.log(nth(l, 4));
-      
+
        </code></pre>
         <strong>  
           <script type="text/javascript">
@@ -598,9 +637,51 @@ console.log(pick(user, [&#039;name&#039;, &#039;friends&#039;]));
           </script>
         </strong>
       </p>
-      </li>      
+      </li> 
+      <li>
+      <blockquote>
+      Реализованна анимация при загрузке страницы. Если обновить страницу, то видно. Код 
+      находится сразу после body.
+      </blockquote> 
+      <pre><code>
+var canvas;
+var context;
+var radius = 0;
+
+window.onload = function() {
+
+    canvas = document.createElement(&#039;canvas&#039;); 
+    context = canvas.getContext(&quot;2d&quot;);  
+    canvas.style.position = &#039;fixed&#039;; 
+    canvas.style.top = &#039;0px&#039;; 
+    canvas.style.left = &#039;0px&#039;; 
+    canvas.style.zIndex = &#039;100&#039;; 
+    canvas.width = window.innerWidth; 
+    canvas.height = window.innerHeight; 
+    document.body.insertBefore(canvas, document.body.firstChild);
+
+    setTimeout(&quot;drawArc()&quot;, 5);
+} 
+
+function drawArc() {
+
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    context.beginPath();
+    context.lineWidth = canvas.width - radius;
+    context.strokeStyle = &quot;rgba(255,255,255,0.8)&quot;;
+    context.arc(canvas.width/2,canvas.height/2,canvas.width/2 + radius,0,Math.PI*2,true); 
+    context.stroke();
+    radius += 1;
+    if(radius &gt; canvas.width)
+      return 0;
+    setTimeout(&quot;drawArc()&quot;, 5);
+}
+
+      </code></pre>
+      </li>     
      </ul>
 
     </div>
+
 </body>
 </html>
