@@ -36,6 +36,7 @@ window.onload = function() {
     document.body.insertBefore(canvas, document.body.firstChild);
 
     setTimeout("drawSpiral()", 5);
+
 } 
 
 function drawArc() {
@@ -47,8 +48,10 @@ function drawArc() {
     context.arc(canvas.width/2,canvas.height/2,canvas.width/2 + radius,0,Math.PI*2,true); 
     context.stroke();
     radius += 1;
-    if(radius > canvas.width)
+    if(radius > canvas.width/2){
+      canvas.style.zIndex = '-100';
       return 0;
+    }
     setTimeout("drawArc()", 5);
 }
 
@@ -67,6 +70,10 @@ function drawSpiral() {
     context.strokeStyle = "rgba(255,255,255,0.8)";
     context.stroke();
     radius += 1;
+    if(radius > canvas.width/2){
+      canvas.style.zIndex = '-100';
+      return 0;
+    }
     setTimeout("drawSpiral()", 5);
 }
 
