@@ -669,6 +669,9 @@ console.log(pick(user, [&#039;name&#039;, &#039;friends&#039;]));
       либо drawArc() (стирается кругами)
       </blockquote> 
       <pre><code>
+
+
+
 var canvas;
 var context;
 var radius = 0;
@@ -686,6 +689,7 @@ window.onload = function() {
     document.body.insertBefore(canvas, document.body.firstChild);
 
     setTimeout(&quot;drawSpiral()&quot;, 5);
+
 } 
 
 function drawArc() {
@@ -697,8 +701,10 @@ function drawArc() {
     context.arc(canvas.width/2,canvas.height/2,canvas.width/2 + radius,0,Math.PI*2,true); 
     context.stroke();
     radius += 1;
-    if(radius &gt; canvas.width)
+    if(radius &gt; canvas.width/2){
+      canvas.style.zIndex = &#039;-100&#039;;
       return 0;
+    }
     setTimeout(&quot;drawArc()&quot;, 5);
 }
 
@@ -717,6 +723,10 @@ function drawSpiral() {
     context.strokeStyle = &quot;rgba(255,255,255,0.8)&quot;;
     context.stroke();
     radius += 1;
+    if(radius &gt; canvas.width/2){
+      canvas.style.zIndex = &#039;-100&#039;;
+      return 0;
+    }
     setTimeout(&quot;drawSpiral()&quot;, 5);
 }
 
