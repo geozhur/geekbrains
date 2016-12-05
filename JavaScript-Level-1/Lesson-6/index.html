@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Урок 6 - javascript-1 </title>
+  <meta name="author" content="Журавлев Георгий">
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+	<link  href="libs/highlight/styles/hybrid.css" rel="stylesheet">
+	<script src="libs/highlight/highlight.pack.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+</head>
+<body>
+ 	<div class="container">
+	 <div class="page-header">
+        <h1>Урок номер 6</h1>
+   </div>
+     <ul>
+      <li>
+
+        <blockquote>
+Создайте функцию addScripts(scripts, callback), которая загружает скрипты из массива scripts, и после загрузки и выполнения их всех вызывает функцию callback.
+
+Скрипт может быть любым, работа функции не должна зависеть от его содержимого.
+
+Пример использования:
+<pre><code class="javascript">
+  addScripts(["a.js", "b.js", "c.js"], function() { a() });
+  /* функция a() описана в a.js и использует b.js,c.js */
+
+</code></pre>
+
+Ошибки загрузки обрабатывать не нужно.
+Один скрипт не ждёт другого. Они все загружаются, а по окончании вызывается обработчик callback.
+Исходный код содержит скрипты a.js, b.js, c.js:
+
+        </blockquote>
+        <p>Результат: На консоль для примера выводится "Саша+Маша"<br>
+
+a.js
+<pre><code class="javascript">
+  function a() 
+  {
+    console.log( b()+'+'+c() );
+  }
+</code></pre>  
+b.js 
+<pre><code class="javascript">
+  function b() {
+    return "Саша";
+  }
+ </code></pre>  
+c.js
+<pre><code class="javascript">
+  function c() {
+    return "Маша";
+  }
+</code></pre>   
+
+Общая:   
+      <pre><code class="javascript">
+ function addScripts(scripts, callback) {
+
+    var count = 0;
+
+    var script = [];
+
+    for(var key in scripts) {
+
+        script[key] = document.createElement(&#039;script&#039;);
+        script[key].src = &quot;js/&quot;+scripts[key];
+        document.body.appendChild(script[key]);
+        script[key].onload = function() {
+           count++;      
+           if (count == scripts.length) {
+            callback();
+           }
+        };
+
+    }
+
+
+
+ }
+
+
+  addScripts([&quot;a.js&quot;, &quot;b.js&quot;, &quot;c.js&quot;], function() { a() });
+
+      </code></pre>
+
+
+        <strong>
+
+        <script type="text/javascript">
+
+         function addScripts(scripts, callback) {
+
+            var count = 0;
+ 
+            var script = [];
+
+            for(var key in scripts) {
+
+                script[key] = document.createElement('script');
+                script[key].src = "js/"+scripts[key];
+                document.body.appendChild(script[key]);
+                script[key].onload = function() {
+                   count++;      
+                   if (count == scripts.length) {
+                    callback();
+                   }
+                };
+
+            }
+
+
+
+         }
+
+
+          addScripts(["a.js", "b.js", "c.js"], function() { a() });
+          /* функция a() описана в a.js и использует b.js,c.js */
+
+        </script>
+   
+
+
+
+        </strong>
+        </p>
+
+      </li>
+    
+     </ul>
+
+    </div>
+
+</body>
+</html>
