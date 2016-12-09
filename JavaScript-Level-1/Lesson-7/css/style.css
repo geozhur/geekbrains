@@ -31,14 +31,14 @@ pre {
 
 
 #del-white, #del-black {
-  width: 270px;
+  width: 500px;
 }
 .del-white, .del-black {
-  width: 30px;
-  height: 30px;
+  width: 60px;
+  height: 60px;
   float:left;
   text-align: center;
-  line-height: 30px;
+  line-height: 60px;
   vertical-align: middle;
 }
 
@@ -47,11 +47,11 @@ pre {
 }
 
 div[class*='sh-'] {
-  width: 30px;
-  height: 30px;
+  width: 60px;
+  height: 60px;
   float:left;
   text-align: center;
-  line-height: 30px;
+  line-height: 60px;
   vertical-align: middle;
 }
 
@@ -66,73 +66,73 @@ background: #fae9d1;
 .pw {
 background-image: url("../img/chess.png");
 background-repeat: no-repeat;
-background-position: -277px -47px;
+background-position: -550px -95px;
 }
 
 .pb {
 background-image: url("../img/chess.png");
 background-repeat: no-repeat;
-background-position: -277px -2px;
+background-position: -550px -2px;
 }
 
 .Rw {
 background-image: url("../img/chess.png");
 background-repeat: no-repeat;
-background-position: -110px -47px;
+background-position: -219px -95px;
 }
 
 .Rb {
 background-image: url("../img/chess.png");
 background-repeat: no-repeat;
-background-position: -110px -1px;
+background-position: -219px -1px;
 }
 
 .Nw {
 background-image: url("../img/chess.png");
 background-repeat: no-repeat;
-background-position: -220px -47px;
+background-position: -439px -95px;
 }
 
 .Nb {
 background-image: url("../img/chess.png");
 background-repeat: no-repeat;
-background-position: -220px -1px;
+background-position: -439px -1px;
 }
 
 .Bw {
 background-image: url("../img/chess.png");
 background-repeat: no-repeat;
-background-position: -165px -45px;
+background-position: -328px -95px;
 }
 
 .Bb {
 background-image: url("../img/chess.png");
 background-repeat: no-repeat;
-background-position: -165px 0px;
+background-position: -328px 0px;
 }
 
 .Kw {
 background-image: url("../img/chess.png");
 background-repeat: no-repeat;
-background-position: 1px -45px;
+background-position: 3px -95px;
 }
 
 .Kb {
 background-image: url("../img/chess.png");
 background-repeat: no-repeat;
-background-position: 1px 0px;;
+background-position: 3px 0px;;
 }
 
 .Qw {
 background-image: url("../img/chess.png");
 background-repeat: no-repeat;
-background-position: -54px -47px;
+background-position: -106px -95px;
 }
 
 .Qb {
 background-image: url("../img/chess.png");
 background-repeat: no-repeat;
-background-position: -54px 0px;;
+background-position: -106px 0px;;
 }
 
 .item-select {
