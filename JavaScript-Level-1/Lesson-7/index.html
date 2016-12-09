@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Урок 7 - javascript-1 </title>
+  <meta name="author" content="Журавлев Георгий">
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+	<link  href="libs/highlight/styles/hybrid.css" rel="stylesheet">
+	<script src="libs/highlight/highlight.pack.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+</head>
+<body>
+ 	<div class="container">
+	 <div class="page-header">
+        <h1>Урок номер 7</h1>
+   </div>
+     <ul>
+      <li>
+
+        <blockquote>
+          Рисуем шахматную доску
+
+        </blockquote>
+<blockquote>
+        Используя результаты домашнего задания к предыдущему уроку, выполнить следующее. Прищелчке мышью на любую клетку доски – необходимо писать ее адрес в произвольное место страницы, например, в div. Адрес должен извлекаться в «шахматном» формате. Например: A1, G6 и тп. При этом, ячейка, на которую нажали должна помечаться произвольным образом,например, выделением рамки или другим цветом. При выделении другой ячейки, предыдущая должна возвращаться к первоначальному виду.
+</blockquote>
+<blockquote>
+Научиться обрабатывать стрелки клавиатуры таким образом, чтобы активную ячейку из предыдущего пункта можно было перемещать по доске. Если ячейка выходит за границы таблицы – она должна появиться с другой стороны. При перемещении ячейки, так же должен извлекаться ее адрес.
+</blockquote>
+<blockquote>
+* Добавить возможность удалять фигуры с доски и возвращать их на прежнее место. Таким образом, необходимо добавить вверху и внизу таблицы область, для «уничтоженных» фигур. При нажатии на любую фигуру на доске, она должна становиться «уничтоженной», т.е. удаляться с доски и перемещаться в соответствующую область (черные в одну сторону,белые – в другую). При нажатии на «уничтоженную» фигуру она должна вернуться на прежнее место.
+</blockquote>
+Решение: <br>
+
+        <div id="del-black"></div>
+        <div id="shah"></div>
+        <div id="pozition"></div>
+        <div id="del-white"></div>
+
+
+
+       <script type="text/javascript">
+         var figurs=['K','Q','R','N','B','p'];
+         var x=['a','b','c','d','e','f','g','h'];
+         var x_flip = array_flip ( x );
+         var y=[8,7,6,5,4,3,2,1];
+         var y_flip = array_flip ( y );
+         var d = [];
+         var el_click = "";
+
+         d.a2=d.b2=d.c2=d.d2=d.e2=d.f2=d.g2=d.h2=6;
+         d.a7=d.b7=d.c7=d.d7=d.e7=d.f7=d.g7=d.h7=-6;
+         d.a1=d.h1=3;
+         d.a8=d.h8=-3;
+         d.b1=d.g1=4;
+         d.b8=d.g8=-4;
+         d.c1=d.f1=5;
+         d.c8=d.f8=-5;
+         d.d1=2;
+         d.e1=1;
+         d.d8=-2;
+         d.e8=-1;
+         
+
+ 
+
+
+
+        function array_flip( trans )
+        {
+          var key, tmp_ar = {};
+
+          for ( key in trans )
+          {
+              if ( trans.hasOwnProperty( key ) )
+              {
+                  tmp_ar[trans[key]] = key;
+              }
+          }
+
+          return tmp_ar;
+        }
+
+         document.onkeydown = function(e) {
+              switch (e.keyCode) {
+                  case 37:
+                      moveSelect(-1, 0);
+                      break;
+                  case 38:
+                      moveSelect(0, -1);
+                      break;
+                  case 39:
+                      moveSelect(1, 0);
+                      break;
+                  case 40:
+                      moveSelect(0, 1);
+                      break;
+              }
+          };
+
+
+         function printPosition() {
+           var newDiv= document.getElementById("pozition");
+           newDiv.innerHTML="Позиция: " + el_click;
+         }
+
+         function moveSelect(mov_x, mov_y) {
+            if(el_click != "") {
+              mov_x = Number(x_flip[el_click[0]])+mov_x;
+              mov_y = Number(y_flip[el_click[1]])+mov_y;
+              mov_x = (mov_x < 0) ? 7 : mov_x;
+              mov_y = (mov_y < 0) ? 7 : mov_y;
+              mov_x = (mov_x > 7) ? 0 : mov_x;
+              mov_y = (mov_y > 7) ? 0 : mov_y;
+              var el = document.getElementById("shah-num-"+el_click);
+              el.classList.remove( 'item-select' );
+              el_click = x[mov_x]+y[mov_y];
+              var newDiv= document.getElementById("shah-num-"+el_click);
+              newDiv.classList.add( 'item-select' );
+              printPosition();
+             }
+         }
+
+         function getFigure(N)
+         {
+             if(N>0) {
+                return figurs[N-1]+'w';
+             } else {
+               return figurs[-N-1]+'b';
+             }
+         }
+
+         function addDivRow(N)
+         {
+            var newDiv=document.createElement('div');
+            newDiv.id="shah-row-"+N;
+            newDiv.setAttribute("class","row");
+            document.getElementById('shah').appendChild(newDiv);
+         }
+
+
+         function moveToDelete(N) {
+            var newDiv=document.createElement('div');
+            newDiv.id="del-num-"+N;
+            if(d[N] > 0) {
+            newDiv.setAttribute("class","del-white");
+            newDiv.classList.add( getFigure(d[N]) );
+            document.getElementById('del-white').appendChild(newDiv);
+            } else {
+             newDiv.setAttribute("class","del-black");
+             newDiv.classList.add( getFigure(d[N]) );
+             document.getElementById('del-black').appendChild(newDiv);  
+            }
+
+            newDiv.ondblclick = function() {
+              newDiv.remove(); 
+              var DivH=document.getElementById("shah-num-"+N ); 
+              DivH.classList.add( getFigure(d[N]) ); 
+            }
+
+
+
+         }
+
+         function addDivCol(cl,N,row,col,text="")
+          {
+            var newDiv=document.createElement('div');
+            newDiv.innerHTML=text;
+            newDiv.id="shah-num-"+col+row;
+            newDiv.setAttribute("class",cl);
+            if(col != 0 && row !=0 && col != 9 && row !=9 ) {
+              newDiv.onclick = function() {
+                  if(el_click != "") {
+                    var el = document.getElementById("shah-num-"+el_click);
+                    el.classList.remove( 'item-select' );
+                  }
+                  newDiv.classList.add( 'item-select' );
+                  el_click = col+row;
+                  printPosition();
+              }
+              newDiv.ondblclick = function() {
+
+                  if(el_click != "") {
+                    var el = document.getElementById("shah-num-"+el_click);
+                    el.classList.remove( 'item-select' );
+                  }
+                 
+                  el_click = col+row;
+                  if(d[el_click]!="") {
+                    var newDiv=document.getElementById("shah-num-"+el_click );
+                    if (newDiv.classList.contains(getFigure(d[el_click]))) {
+                    newDiv.classList.remove( getFigure(d[el_click]) );
+                    moveToDelete(el_click);
+                   }
+                  }
+
+
+                 
+              }
+            }
+            document.getElementById("shah-row-"+N).appendChild(newDiv);
+
+          }
+
+
+        function addToDiv(key,text) 
+        { 
+          var newDiv=document.getElementById("shah-num-"+key);
+          newDiv.classList.add( text );
+          //newDiv.innerHTML=text;
+        }
+
+        function createShah()
+          {
+              var cl,col,row, text="";
+              for (var i = 0; i < 10; i++) {
+                  
+                  addDivRow(i);
+                  for (var j = 0; j < 10; j++) {
+                    text="";
+                    if(  i==0 && j==0 || i==0 && j==9 || i==9 && j==9 || i==9 && j==0) {
+                      row = i;
+                      col = j;
+                      cl="sh-white";
+                    } else if( (i==0 || i==9) && j>0 && j<9) {
+                      row = i;
+                      col = j;
+                      text = x[j-1];
+                      cl="sh-white";
+                    } else if( (j==0 || j==9) && i>0 && i<9) {
+                      row = i;
+                      col = j;
+                      text = y[i-1];
+                      cl="sh-white";
+                    } else {
+                      row = y[i-1];
+                      col = x[j-1];
+                      if( (i+j)%2 == 0) {
+                        cl="sh-broun";
+                      } else {
+                        cl="sh-darkbroun";
+                      }
+                    }
+                    addDivCol(cl,i,row,col,text);
+                  }
+              }
+          }
+
+
+          createShah();
+
+          for(var key in d) {
+               addToDiv(key,getFigure(d[key]) ) ;
+          }
+
+       </script>
+      </li>
+    
+     </ul>
+
+    </div>
+
+</body>
+</html>
