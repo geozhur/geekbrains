@@ -32,7 +32,9 @@
 
 </blockquote>
   
-Решение: <br>
+Решение: 
+<p>Доска сделана в объектном стили. Шахматные фигуры бирутся из svg файла, по координатам. Можно задавать проихвольные цвета, размеры ячейки и число ячеек. Было создано три класса. Board -> ChessBoard , Chess . Шахматная композиция задается с помощью нотации (упрощенной, т. к. мы пока не играем, а только доску рисуем) Форсайта — Эдвардса</p>
+<br>
 <b>Фигуры удаляются по двойному клику.</b><br>
 
         <div class="del" id="shah-black"></div>
@@ -41,6 +43,9 @@
         <div class="del" id="shah-white"></div>
 
        <script type="text/javascript">
+
+
+       // Класс создания доски. Можно создать доску произвольного размера, цветами и координатами.
 
        function Board( elem,         // Элемент в котором рисуем доску
                        sizeСell,     // Размер ячейки доски
@@ -212,12 +217,13 @@
                 img.heigth = sizeСell;
 
                 img.id = 'img-'+elem.id+'-'+x+y;
-               // console.log(divTemp);
 
                 divTemp.appendChild(img);
                 return img;
             } 
        }
+
+    /// Класс создания доски шахмат
 
        function ChessBoard(elem,sizeСell,colorB,colorW) 
        {
@@ -332,10 +338,9 @@
                   ImgToCell(pos[key],key.charAt(0),key.charAt(1));
                }
             };
-
        }
 
-
+       // Создаем шахматную игру.
        function Chess(elem, cB) {
            var chBrd = new ChessBoard(elem,cB.sizeСell,cB.colorB,cB.colorW);
 
@@ -352,8 +357,8 @@
 
        var conf = {
            sizeСell: 50,  // размер в пикселах ячейки доски
-           colorB: '#ac7d60',
-           colorW: '#fae9d1',
+           colorB: '#ac7d60', // цвет черного поля
+           colorW: '#fae9d1', // цвет светлого поля
            pieceDir: 'img/', // все фигуры в одном файле svg
        };
 
