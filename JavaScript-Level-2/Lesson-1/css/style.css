@@ -1,0 +1,151 @@
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  margin-bottom: 60px;
+}
+
+
+
+canvas{
+  position: absolute;
+  height:800px;
+}
+
+.container {
+  width: auto;
+  max-width: 680px;
+  padding: 0 15px;
+}
+
+.container .text-muted {
+  margin: 20px 0;
+}
+
+pre {
+	background: none;
+	border: none;
+	margin-left: 0;
+}
+
+
+.del {
+  width: 500px;
+}
+.shah-white, .shah-black {
+  width: 60px;
+  height: 60px;
+  float:left;
+  text-align: center;
+  line-height: 60px;
+  vertical-align: middle;
+}
+
+#shah, #shah2{
+  clear: both;
+}
+
+.pozition,.del{
+  width: 100%;
+  clear: left;
+}
+.cell-sh{
+  float:left;
+  text-align: center;
+  vertical-align: middle; 
+}
+
+div[class*='sh-'] {
+  width: 60px;
+  height: 60px;
+  float:left;
+  text-align: center;
+  line-height: 60px;
+  vertical-align: middle;
+}
+
+.sh-darkbroun {
+background: #ac7d60;
+}
+
+.sh-broun {
+background: #fae9d1;
+}
+
+.pw {
+background-image: url("../img/chess.png");
+background-repeat: no-repeat;
+background-position: -550px -95px;
+}
+
+.pb {
+background-image: url("../img/chess.png");
+background-repeat: no-repeat;
+background-position: -550px -2px;
+}
+
+.Rw {
+background-image: url("../img/chess.png");
+background-repeat: no-repeat;
+background-position: -219px -95px;
+}
+
+.Rb {
+background-image: url("../img/chess.png");
+background-repeat: no-repeat;
+background-position: -219px -1px;
+}
+
+.Nw {
+background-image: url("../img/chess.png");
+background-repeat: no-repeat;
+background-position: -439px -95px;
+}
+
+.Nb {
+background-image: url("../img/chess.png");
+background-repeat: no-repeat;
+background-position: -439px -1px;
+}
+
+.Bw {
+background-image: url("../img/chess.png");
+background-repeat: no-repeat;
+background-position: -328px -95px;
+}
+
+.Bb {
+background-image: url("../img/chess.png");
+background-repeat: no-repeat;
+background-position: -328px 0px;
+}
+
+.Kw {
+background-image: url("../img/chess.png");
+background-repeat: no-repeat;
+background-position: 3px -95px;
+}
+
+.Kb {
+background-image: url("../img/chess.png");
+background-repeat: no-repeat;
+background-position: 3px 0px;;
+}
+
+.Qw {
+background-image: url("../img/chess.png");
+background-repeat: no-repeat;
+background-position: -106px -95px;
+}
+
+.Qb {
+background-image: url("../img/chess.png");
+background-repeat: no-repeat;
+background-position: -106px 0px;;
+}
+
+.item-select {
+  outline: 3px solid rgba(0,0,0,0.8);
+    outline-offset: -3px; 
+}

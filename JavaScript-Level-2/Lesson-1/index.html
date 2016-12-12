@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Урок 1 - javascript-2 </title>
+  <meta name="author" content="Журавлев Георгий">
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+	<link  href="libs/highlight/styles/hybrid.css" rel="stylesheet">
+	<script src="libs/highlight/highlight.pack.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+</head>
+<body>
+ 	<div class="container">
+	 <div class="page-header">
+        <h1>Урок номер 1 - Javascript-2</h1>
+   </div>
+     <ul>
+      <li>
+<blockquote>
+  Разработать класс, генерирующий шахматную доску на странице. Конструктор в качестве параметра должен принимать селектор элемента в котором должна создаться доска, либо DOM Node. При этом должна быть возможность подписаться на события доски через созданный объект (не напрямую к DOM Node, а именно извне используя только объект доски), получения и установки координаты активной ячейки (шахматной координаты вида “A1”). Для генерации доски можно использовать произвольные html-тэги. Подумать какие свойства должны быть скрыты, а какие нет решение аргументировать в комментариях к коду.
+</blockquote>
+<blockquote>
+* Добавить базовый класс, который мог бы генерировать таблицы (доски) любого размера и унаследовать от него разработанный класс шахматной доски.
+</blockquote>
+<blockquote>
+* Все то же самое с помощью ООП в прототипном стиле (разобраться самостоятельно).
+
+</blockquote>
+  
+Решение: <br>
+<b>Фигуры удаляются по двойному клику.</b><br>
+
+        <div class="del" id="shah-black"></div>
+        <div id="shah"></div>
+        <div class="pozition" id="shah-pozition"></div>
+        <div class="del" id="shah-white"></div>
+
+       <script type="text/javascript">
+
+       function Board( elem,         // Элемент в котором рисуем доску
+                       sizeСell,     // Размер ячейки доски
+                       colorB,       // Цвет черного поля  
+                       colorW,       // Цвет белого поля
+                       coorV,        // Массив координат доски по вертикали , пример [8,7,6,5,4]
+                                     // Координаты начиются от верхнего левого угла
+                       coorH,        // Массив координат доски по горизонтале , пример [a,b,c,d,e]
+                       visibleCoorV = true, // Будем ли рисовать вертикальную линейку координат
+                       visibleCoorH = true)// Будем ли рисовать горизонлаьную линейку координат  
+       {
+
+            var lenX = coorH.length + visibleCoorV * 2;
+            var lenY = coorV.length + visibleCoorH * 2;
+
+            var el_click=""; // в переменной хранится выделенный  div
+
+            this.getSelection = function() {
+              return el_click;
+            } 
+
+            function onClickCell() {
+                  if(el_click != "") {
+                    el_click.classList.remove( 'item-select' );
+                    el_click.removeAttribute("tabIndex");
+                  }
+                  this.classList.add( 'item-select' );
+                  this.setAttribute("tabIndex",0);
+                  el_click = this;
+                  this.focus();          
+            }
+
+            function onFocusCell() {
+               var newDiv= document.getElementById(elem.id+"-pozition");
+               newDiv.innerHTML="Позиция: " + coorH[el_click.y]+coorV[el_click.x] ;
+            }
+
+
+            
+           function moveSelect(mov_y, mov_x) {
+              if(el_click != "") {
+                mov_x = el_click.x + mov_x;
+                mov_y = el_click.y + mov_y;
+                mov_x = (mov_x < 0) ? coorV.length-1 : mov_x;
+                mov_y = (mov_y < 0) ? coorH.length-1 : mov_y;
+                mov_x = (mov_x > coorV.length-1) ? 0 : mov_x;
+                mov_y = (mov_y > coorH.length-1) ? 0 : mov_y;
+                el_click.classList.remove( 'item-select' );
+                el_click.removeAttribute("tabIndex");
+                var newDiv= document.getElementById(elem.id+"-"+mov_x+mov_y);
+                newDiv.x = mov_x;
+                newDiv.y = mov_y;
+
+                newDiv.classList.add( 'item-select' );
+                newDiv.setAttribute("tabIndex",0);
+                el_click=newDiv;
+                newDiv.focus();
+               }
+           }
+
+
+           elem.onkeydown = function(e) {
+              
+              switch (e.keyCode) {
+                  case 37:
+                      moveSelect(-1, 0);
+                      break;
+                  case 38:
+                      moveSelect(0, -1);
+                      break;
+                  case 39:
+                      moveSelect(1, 0);
+                      break;
+                  case 40:
+                      moveSelect(0, 1);
+                      break;
+              }
+            }
+
+
+
+            function createTable() {
+
+              var x;
+              var y;
+
+              elem.style.width=(lenX * sizeСell) + 'px';
+
+              for (var i = 0; i < lenY; i++) {                
+                    for (var j = 0; j < lenX; j++) { 
+                      x = i;
+                      y = j;
+
+                      var newDiv=document.createElement('div');
+                      newDiv.setAttribute("class","cell-sh");
+                      newDiv.style.width = sizeСell+'px';
+                      newDiv.style.height = sizeСell+'px';
+                      newDiv.style.lineHeight = sizeСell+'px';
+                      newDiv.id='line-'+elem.id+'-'+i+j;
+
+
+                      if( (visibleCoorV && visibleCoorH) 
+                          && ( (i==0 && j==0) 
+                            || (i==0 && j==lenX-1)
+                            || (i==lenY-1 && j==0)
+                            || (i==lenY-1 && j==lenX-1) ) ) {
+
+                      } else if( visibleCoorV && (j==0 || j==lenX-1)) {
+                        
+                        if (visibleCoorH) {
+                          newDiv.innerHTML=coorV[i-1];
+                        } else {
+                          newDiv.innerHTML=coorV[i];
+                        }
+                      
+                      } else if( visibleCoorH && (i==0 || i==lenY-1)) {
+                        if (visibleCoorV) {
+                          newDiv.innerHTML=coorH[j-1];
+                        } else {
+                          newDiv.innerHTML=coorH[j];
+                        }
+                      
+                      } else {
+                        if(visibleCoorH) {
+                          x--;
+                        }
+                        if(visibleCoorV) {
+                          y--;
+                        }
+                       // newDiv.innerHTML=x+y;
+                        newDiv.id=elem.id+'-'+x+y;
+                        if( (x+y)%2 == 0) {
+                          newDiv.style.backgroundColor=colorB;
+                        } else {
+                          newDiv.style.backgroundColor=colorW;
+                        } 
+                        
+                        newDiv.x = x;
+                        newDiv.y = y;
+                        newDiv.onfocus = onFocusCell;
+                        newDiv.onclick = onClickCell;
+                     //   newDiv.ondblclick = onDblClickCell;
+                      }
+
+                      document.getElementById('shah').appendChild(newDiv);
+                      
+                      
+                  } //end for j
+              } //end for i
+
+            }
+
+            this.run = function() {
+               createTable();
+            }
+
+
+            // установка картинки в ячейку доски.
+            this.addImgToCell = function(srcImg, x, y, el) {
+                var divTemp = {};
+                if(el != undefined) {
+                    divTemp = el;
+                } else {
+                    divTemp=document.getElementById(elem.id+'-'+x+y);
+                }
+                var img = document.createElement('img');
+                img.src = srcImg;
+                img.width = sizeСell;
+                img.heigth = sizeСell;
+
+                img.id = 'img-'+elem.id+'-'+x+y;
+               // console.log(divTemp);
+
+                divTemp.appendChild(img);
+                return img;
+            } 
+       }
+
+       function ChessBoard(elem,sizeСell,colorB,colorW) 
+       {
+            var cV = [8,7,6,5,4,3,2,1];
+            var cH = ['a','b','c','d','e','f','h','g'];
+
+            var pos = {};
+            var imgF = {
+                  p: 'chess.svg#svgView(viewBox(225, 45, 45, 45))',
+                  n: 'chess.svg#svgView(viewBox(135, 45, 45, 45))',
+                  b: 'chess.svg#svgView(viewBox(90, 45, 45, 45))',
+                  r: 'chess.svg#svgView(viewBox(180, 45, 45, 45))',
+                  q: 'chess.svg#svgView(viewBox(45, 45, 45, 45))',
+                  k: 'chess.svg#svgView(viewBox(0, 45, 45, 45))',
+                  P: 'chess.svg#svgView(viewBox(225, 0, 45, 45))',
+                  N: 'chess.svg#svgView(viewBox(135, 0, 45, 45))',
+                  B: 'chess.svg#svgView(viewBox(90, 0, 45, 45))',
+                  R: 'chess.svg#svgView(viewBox(180, 0, 45, 45))',
+                  Q: 'chess.svg#svgView(viewBox(45, 0, 45, 45))',
+                  K: 'chess.svg#svgView(viewBox(0, 0, 45, 45))',
+
+            };
+
+
+
+
+            Board.call(this,elem,sizeСell,colorB,colorW,cV,cH,true,true);
+  
+
+
+            var parentEnable = this.addImgToCell;
+            this.addImgToCell = function(N,x,y) {     
+              var img = parentEnable(conf.pieceDir+imgF[N],x,y);
+              img.x1 = x;
+              img.y1 = y;
+              img.f = imgF[N];
+              img.F = N;
+              img.ondblclick = onDblClickCell;
+             }
+
+
+            //var moveToDelete = this.moveToDelete;
+
+            // Установка фигур. Большими буквами белые фигуры, маленькими буквами черные. 
+            // x, y координаты на доске.
+
+
+
+            function onDblClickCell () {
+              var newDiv=document.createElement('div');
+              var divTemp ={};
+              newDiv.id="del-num-"+this.x1+this.y1;
+              if(this.F != (this.F).toLowerCase()) {
+                newDiv.setAttribute("class",elem.id+"-white");
+                divTemp = document.getElementById(elem.id+'-white').appendChild(newDiv);
+              } else {
+                newDiv.setAttribute("class",elem.id+"-black");
+                divTemp = document.getElementById(elem.id+'-black').appendChild(newDiv);  
+             }
+
+              this.remove();
+              var img =parentEnable(conf.pieceDir+this.f,this.x1,this.y1,divTemp)
+              img.f=this.f;
+              img.x1 = this.x1;
+              img.y1= this.y1;
+              img.ondblclick = function() {
+                
+                var DivH=document.getElementById(elem.id+'-'+this.x1+this.y1 );
+                var imgH =parentEnable(conf.pieceDir+this.f,this.x1,this.y1,DivH)
+                newDiv.remove(); 
+               // DivH.appendChild(this);
+              }
+
+            }
+
+
+              function fenToObj(fen) {
+
+              fen = fen.replace(/ .+$/, '');
+
+              var rows = fen.split('/');
+              var position = {};
+
+              for (var i = 0; i < 8; i++) {
+                var row = rows[i].split('');
+                var colIndex = 0;
+
+                for (var j = 0; j < row.length; j++) {
+
+                  if (row[j].search(/[1-8]/) !== -1) {
+                    var emptySquares = parseInt(row[j], 10);
+                    colIndex += emptySquares;
+                  }
+
+                  else {
+
+                    var square = i.toString() + colIndex.toString() ;
+                    position[square] = row[j];
+                    colIndex++;
+                  }
+                }
+              }
+
+              return position;
+            };
+
+            // Загружаем фигуры на доску по FEN нотации
+            var ImgToCell = this.addImgToCell;
+            this.load = function (fen) {
+               pos = fenToObj(fen);
+               for(key in pos) {
+                  ImgToCell(pos[key],key.charAt(0),key.charAt(1));
+               }
+            };
+
+       }
+
+
+       function Chess(elem, cB) {
+           var chBrd = new ChessBoard(elem,cB.sizeСell,cB.colorB,cB.colorW);
+
+           chBrd.run();
+
+           var parentLoad = chBrd.load;
+           this.load = function(fen) { 
+              parentLoad(fen);
+           }
+
+       }
+
+
+
+       var conf = {
+           sizeСell: 50,  // размер в пикселах ячейки доски
+           colorB: '#ac7d60',
+           colorW: '#fae9d1',
+           pieceDir: 'img/', // все фигуры в одном файле svg
+       };
+
+
+       var elem = document.getElementById('shah');
+
+       var ch = new Chess(elem, conf); // создаем шахматы
+
+       // Загружаем начальную позицию
+       ch.load("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
+       
+
+
+
+       </script>
+      </li>
+    
+     </ul>
+
+    </div>
+
+</body>
+</html>
