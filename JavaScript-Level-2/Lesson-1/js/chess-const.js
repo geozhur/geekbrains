@@ -1,3 +1,4 @@
+"use strict";
 //////
 //
 // Класс создания доски. Можно создать доску произвольного 
@@ -283,7 +284,7 @@ function ChessBoard(elem,sizeСell,colorB,colorW)
     var ImgToCell = this.addImgToCell;
     this.load = function (fen) {
        pos = fenToObj(fen);
-       for(key in pos) {
+       for(var key in pos) {
            ImgToCell(pos[key],key.charAt(0),key.charAt(1));
        }
     };
