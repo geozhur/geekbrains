@@ -428,7 +428,6 @@ function ChessBoard(elem,sizeСell,colorB,colorW)
           return true;
          else
           return false; 
-       }
     }
 
     // 
