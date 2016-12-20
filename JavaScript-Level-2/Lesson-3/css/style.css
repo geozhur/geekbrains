@@ -1,0 +1,85 @@
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  margin-bottom: 60px;
+}
+
+button{
+  margin-top: 10px;
+}
+
+canvas{
+  position: absolute;
+  height:800px;
+}
+
+#myform4 input{
+  margin-top: 10px;
+}
+
+.result{
+  margin-top: 10px;
+}
+.container {
+  width: auto;
+  max-width: 680px;
+  padding: 0 15px;
+}
+
+.container .text-muted {
+  margin: 20px 0;
+}
+
+pre {
+	background: none;
+	border: none;
+	margin-left: 0;
+}
+
+
+.del {
+  width: 500px;
+}
+.shah-white, .shah-black {
+
+  float:left;
+  text-align: center;
+  vertical-align: middle;
+}
+
+#shah, #shah2{
+  
+}
+
+.pozition,.del{
+  float: left;
+  width: 100%;
+}
+
+.cell-sh{
+  float:left;
+  text-align: center;
+  vertical-align: middle; 
+}
+
+.chess {
+  display: inline-block;
+  margin-top: 50px;
+  width: 100%;
+}
+
+.sh-darkbroun {
+background: #ac7d60;
+}
+
+.sh-broun {
+background: #fae9d1;
+}
+
+
+.item-select {
+  outline: 3px solid rgba(0,0,0,0.8);
+    outline-offset: -3px; 
+}
